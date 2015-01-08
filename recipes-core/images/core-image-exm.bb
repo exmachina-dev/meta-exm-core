@@ -1,4 +1,4 @@
-require recipes-extended/images/core-image-rt-extended.bb
+require recipes-core/images/core-image-minimal.bb
 
 SUMMARY = "A console-only image that fully supports the target device \
 hardware."
