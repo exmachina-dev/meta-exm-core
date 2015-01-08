@@ -53,7 +53,11 @@
 
 inherit kernel
 inherit kernel-yocto
-require recipes-kernel/linux/linux-yocto-tiny_3.14.bb
+#require recipes-kernel/linux/linux-yocto-tiny_3.14.bb
+require recipes-kernel/linux/linux-yocto.inc
+
+LINUX_KERNEL_TYPE = "tiny"
+KCONFIG_MODE = "--allnoconfig"
 
 # Override SRC_URI in a bbappend file to point at a different source
 # tree if you do not want to build from Linus' tree.
