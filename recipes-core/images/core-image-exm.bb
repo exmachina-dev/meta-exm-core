@@ -5,4 +5,7 @@ hardware."
 
 LICENSE = "MIT"
 
-IMAGE_INSTALL += "python"
+IMAGE_INSTALL += "\
+python3 \
+python3-pyliblo \
+"
