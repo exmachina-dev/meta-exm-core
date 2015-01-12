@@ -8,6 +8,7 @@ LICENSE = "MIT"
 IMAGE_INSTALL += "\
 python3 \
 python3-pyliblo \
+python3-pylibmodbus \
 "
 CORE_IMAGE_EXTRA_INSTALL += "\
 dropbear \
