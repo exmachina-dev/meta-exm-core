@@ -9,3 +9,6 @@ IMAGE_INSTALL += "\
 python3 \
 python3-pyliblo \
 "
+CORE_IMAGE_EXTRA_INSTALL += "\
+dropbear \
+"
