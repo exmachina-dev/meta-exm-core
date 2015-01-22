@@ -8,16 +8,16 @@ OS for Armaz block.
 
 This layer depends on:
 
-  URI: git://git.openembedded.org/bitbake
-  branch: master
+URI: git://git.openembedded.org/bitbake
+branch: master
 
-  URI: git://git.openembedded.org/openembedded-core
-  layers: meta
-  branch: master
+URI: git://git.openembedded.org/openembedded-core
+layers: meta
+branch: master
 
-  URI: git://git.openembedded.org/meta-openembedded
-  layers: meta-oe, meta-python
-  branch: master
+URI: git://git.openembedded.org/meta-openembedded
+layers: meta-oe, meta-python
+branch: master
 
 
 ## Patches
@@ -30,10 +30,10 @@ Maintainer: Benoit Rapidel <benoit.rapidel+devs@exmachina.fr>
 
 ## Table of Contents
 
-  I. Adding the meta-exm-core layer to your build
+1. Adding the meta-exm-core layer to your build
 
 
-### I. Adding the exm-core layer to your build
+### 1. Adding the meta-exm-core layer to your build
 
 In order to use this layer, you need to make the build system aware of
 it.
