@@ -8,6 +8,7 @@ OS for Armaz block.
 
 This layer depends on:
 
+```
 URI: git://git.openembedded.org/bitbake
 branch: master
 
@@ -18,6 +19,7 @@ branch: master
 URI: git://git.openembedded.org/meta-openembedded
 layers: meta-oe, meta-python
 branch: master
+```
 
 
 ## Patches
@@ -25,7 +27,7 @@ branch: master
 Please submit any patches against the meta-exm-core layer to the
 maintainer:
 
-Maintainer: Benoit Rapidel <benoit.rapidel+devs@exmachina.fr>
+Maintainer: [Benoit Rapidel](mailto:benoit.rapidel+devs@exmachina.fr)
 
 
 ## Table of Contents
