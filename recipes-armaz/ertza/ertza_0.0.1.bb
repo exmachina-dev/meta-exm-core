@@ -14,6 +14,7 @@ PV = "0.0.1+git${SRCPV}"
 
 SRC_URI = "git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
            file://init \
+           file://ertza.service \
            file://ertza@.service \
 "
 
@@ -45,5 +46,5 @@ do_install() {
 	# deal with systemd unit files
 	install -d ${D}${systemd_unitdir}/system
 	install -m 0644 ${WORKDIR}/ertza@.service ${D}${systemd_unitdir}/system
-	install -m 0644 ${S}/bin/ertza ${D}${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/ertza.service ${D}${systemd_unitdir}/system
 }
