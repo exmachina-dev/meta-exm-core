@@ -3,7 +3,7 @@ Description=Ertza Per-Connection server
 After=syslog.target
 
 [Service]
-EnvironmentFile=-/etc/ertza/default.conf
+EnvironmentFile=-/etc/default/ertza
 ExecStart=-@BINDIR@/ertza $ERTZA_EXTRA_ARGS
 ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
 StandardInput=socket
