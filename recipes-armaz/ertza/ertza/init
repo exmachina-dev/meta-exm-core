@@ -8,11 +8,11 @@
 # Short-Description:	Ertza main process
 ### END INIT INFO
 #
-# Do not configure this file. Edit /etc/default/ertza instead!
+# Do not configure this file. Edit /etc/ertza/default.conf instead!
 #
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/usr/sbin/ertza
+DAEMON=/usr/bin/ertza
 NAME=ertza
 DESC="Ertza main process"
 PIDFILE=/var/run/ertza.pid
