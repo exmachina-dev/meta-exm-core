@@ -1,13 +1,10 @@
-=============
-meta-exm-core
-=============
+# meta-exm-core
 
 This layer provides recipes and images for building a minimal embedded
 OS for Armaz block.
 
 
-Dependencies
-============
+## Dependencies
 
 This layer depends on:
 
@@ -23,8 +20,7 @@ This layer depends on:
   branch: master
 
 
-Patches
-=======
+## Patches
 
 Please submit any patches against the meta-exm-core layer to the
 maintainer:
@@ -32,16 +28,12 @@ maintainer:
 Maintainer: Benoit Rapidel <benoit.rapidel+devs@exmachina.fr>
 
 
-Table of Contents
-=================
+## Table of Contents
 
-  I. Adding the exm-core layer to your build
+  I. Adding the meta-exm-core layer to your build
 
 
-I. Adding the exm-core layer to your build
-=================================================
-
---- replace with specific instructions for the exm-core layer ---
+### I. Adding the exm-core layer to your build
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -51,11 +43,13 @@ yocto build tree, you can add it to the build system by adding the
 location of the exm-core layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
-  BBLAYERS ?= " \
+```
+BBLAYERS ?= " \
     /path/to/yocto/meta \
     /path/to/yocto/meta-yocto \
     /path/to/yocto/meta-yocto-bsp \
     /path/to/openembedded/meta-oe
     /path/to/openembedded/meta-python
     /path/to/yocto/meta-exm-core \
-    "
+"
+```
