@@ -20,7 +20,7 @@ SRC_URI = "git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
 
 S = "${WORKDIR}/git"
 
-inherit distutils update-rc.d systemd
+inherit setuptools update-rc.d systemd
 INITSCRIPT_NAME = "ertza"
 INITSCRIPT_PARAMS = "defaults 10"
 
@@ -32,9 +32,12 @@ BINCOMMANDS = "ertza"
 do_install() {
 	install -d ${D}${sysconfdir} \
 		${D}${sysconfdir}/init.d \
-		${D}${sysconfdir}/default \
 		${D}${sysconfdir}/ertza \
 		${D}${bindir} \
+
+	install -m 0755 ${S}/bin/ertza ${D}${bindir}/
+
+	install -m 0755 ${S}/ertza/default.conf ${D}${sysconfdir}/ertza/
 
 	sed -e 's,/etc,${sysconfdir},g' \
 		-e 's,/usr/sbin,${sbindir},g' \
@@ -48,3 +51,10 @@ do_install() {
 	install -m 0644 ${WORKDIR}/ertza@.service ${D}${systemd_unitdir}/system
 	install -m 0644 ${WORKDIR}/ertza.service ${D}${systemd_unitdir}/system
 }
+
+FILES_${PN} = "${sysconfdir}/init.d/ertza \
+               ${sysconfdir}/ertza/* \
+               ${systemd_unitdir}/system/ertza@.service \
+               ${systemd_unitdir}/system/ertza.service \
+               ${bindir}/ertza \
+"
