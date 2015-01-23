@@ -20,7 +20,7 @@ SRC_URI = "git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d systemd
+inherit setuptools3 update-rc.d systemd
 INITSCRIPT_NAME = "ertza"
 INITSCRIPT_PARAMS = "defaults 10"
 
@@ -57,4 +57,5 @@ FILES_${PN} = "${sysconfdir}/init.d/ertza \
                ${systemd_unitdir}/system/ertza@.service \
                ${systemd_unitdir}/system/ertza.service \
                ${bindir}/ertza \
+               ${PYTHON_SITEPACKAGES_DIR}/ertza* \
 "
