@@ -7,10 +7,12 @@ SECTION = "libs"
 LICENSE = "none"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-SRCREV = "bb9f1a0198dc661d442ee76ff227c82bf8ce6ed0"
+SRCREV = "f047f695d582c34b30d2263f00b8ed5bcf39e4a7"
 
-PR = "r0"
+PR = "r1"
 PV = "0.0.1+git${SRCPV}"
+
+RDEPENDS_${PN} = "python3 python3-multiprocessing python3-pyliblo python3-pylibmodbus"
 
 SRC_URI = "git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
            file://init \
@@ -20,7 +22,7 @@ SRC_URI = "git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d systemd
+inherit setuptools3 update-rc.d systemd
 INITSCRIPT_NAME = "ertza"
 INITSCRIPT_PARAMS = "defaults 10"
 
@@ -29,7 +31,13 @@ SYSTEMD_SERVICE_${PN} = "ertza"
 
 BINCOMMANDS = "ertza"
 
-do_install() {
+# need to export these variables for python-config to work
+export BUILD_SYS
+export HOST_SYS
+export STAGING_INCDIR
+export STAGING_LIBDIR
+
+do_install_append() {
 	install -d ${D}${sysconfdir} \
 		${D}${sysconfdir}/init.d \
 		${D}${sysconfdir}/ertza \
@@ -57,4 +65,5 @@ FILES_${PN} = "${sysconfdir}/init.d/ertza \
                ${systemd_unitdir}/system/ertza@.service \
                ${systemd_unitdir}/system/ertza.service \
                ${bindir}/ertza \
+               ${PYTHON_SITEPACKAGES_DIR}/ertza* \
 "

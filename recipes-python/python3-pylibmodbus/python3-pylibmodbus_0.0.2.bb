@@ -17,4 +17,4 @@ S = "${WORKDIR}/git"
 
 #S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit distutils
+inherit setuptools3
