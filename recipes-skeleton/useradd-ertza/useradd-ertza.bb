@@ -1,15 +1,15 @@
-SUMMARY = "Armaz user package"
+SUMMARY = "Ertza user package"
 
-DESCRIPTION = "Add armaw user and create home dir."
+DESCRIPTION = "Add ertza user and create home dir."
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 SRC_URI = "file://bashrc"
 
-_USER = "armaz"
-_GROUP = "armaz"
-_HOMEDIR = "/home/armaz"
+_USER = "ertza"
+_GROUP = "ertza"
+_HOMEDIR = "/home/ertza"
 _SHELL = "/bin/bash"
 _PASSWD = "exmachina"
 
