@@ -35,6 +35,6 @@ do_install () {
         chgrp -R ${_GROUP} ${D}${_HOMEDIR}
 }
 
-FILES_${PN} = "${_HOMEDIR}/*"
+FILES_${PN} = "${_HOMEDIR}/.bashrc"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
