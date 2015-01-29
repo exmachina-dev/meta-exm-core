@@ -5,12 +5,25 @@ hardware."
 
 LICENSE = "MIT"
 
-IMAGE_INSTALL += "\
-python3 \
-python3-pyliblo \
-python3-pylibmodbus \
-ertza \
+IMAGE_INSTALL = "packagegroup-core-boot \
+                 ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
+                 ${CORE_IMAGE_EXTRA_INSTALL}\
+                 useradd-ertza \
+                 ertza \
 "
-CORE_IMAGE_EXTRA_INSTALL += "\
-dropbear \
-"
+
+IMAGE_LINGUAS = " "
+
+LICENSE = "MIT"
+
+inherit core-image
+
+IMAGE_ROOTFS_SIZE ?= "8192"
+
+DISTRO_FEATURES_remove = "alsa"
+
+DISTRO_FEATURES_append = " systemd"
+VIRTUAL-RUNTIME_init_manager = "systemd"
+
+DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
+VIRTUAL-RUNTIME_initscripts = ""
