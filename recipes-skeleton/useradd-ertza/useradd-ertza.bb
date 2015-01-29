@@ -12,7 +12,7 @@ SRC_URI = "file://bashrc \
 _USER = "ertza"
 _GROUP = "ertza"
 _HOMEDIR = "/home/ertza"
-_SHELL = "/bin/bash"
+_SHELL = "/bin/sh"
 _PASSWD = "exmachina"
 
 S = "${WORKDIR}"
