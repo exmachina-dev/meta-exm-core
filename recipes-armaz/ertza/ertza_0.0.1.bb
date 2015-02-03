@@ -12,21 +12,23 @@ SRCREV = "fef3c3886981488e8801d45f35770be81fe9137e"
 PR = "r2"
 PV = "0.0.1+git${SRCPV}"
 
-RDEPENDS_${PN} = "python3 \
-                  python3-lang \
-                  python3-multiprocessing \
-                  python3-subprocess \
-                  python3-threading \
-                  python3-readline \
-                  python3-logging \
-                  python3-pyliblo \
-                  python3-pylibmodbus \
+RDEPENDS_${PN} = "\
+    python3 \
+    python3-lang \
+    python3-multiprocessing \
+    python3-subprocess \
+    python3-threading \
+    python3-readline \
+    python3-logging \
+    python3-pyliblo \
+    python3-pylibmodbus \
 "
 
-SRC_URI = "git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
-           file://init \
-           file://ertza.service \
-           file://ertza@.service \
+SRC_URI = "\
+    git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
+    file://init \
+    file://ertza.service \
+    file://ertza@.service \
 "
 
 S = "${WORKDIR}/git"

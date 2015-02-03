@@ -1,15 +1,15 @@
-require recipes-core/images/core-image-minimal.bb
+require recipes-core/images/core-image-base.bb
 
 SUMMARY = "A console-only image that fully supports the target device \
 hardware."
 
 LICENSE = "MIT"
 
-IMAGE_INSTALL = "packagegroup-core-boot \
-                 ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
-                 ${CORE_IMAGE_EXTRA_INSTALL}\
-                 useradd-ertza \
-                 ertza \
+IMAGE_INSTALL += "\
+    packagegroup-distro-base \
+    ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
+    useradd-ertza \
+    ertza \
 "
 
 IMAGE_LINGUAS = " "
