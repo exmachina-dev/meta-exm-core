@@ -12,6 +12,8 @@ IMAGE_INSTALL += "\
     ertza \
 "
 
+IMAGE_FEATURES_remove = "splash"
+
 IMAGE_LINGUAS = " "
 
 LICENSE = "MIT"
@@ -22,7 +24,7 @@ IMAGE_ROOTFS_SIZE ?= "8192"
 
 DISTRO_FEATURES_remove = "alsa"
 
-DISTRO_FEATURES_append = " systemd"
+DISTRO_FEATURES_append = " systemd serial"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
