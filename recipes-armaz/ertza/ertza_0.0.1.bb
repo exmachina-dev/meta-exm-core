@@ -13,6 +13,7 @@ PR = "r2"
 PV = "0.0.1+git${SRCPV}"
 
 RDEPENDS_${PN} = "\
+    packagegroup-python3 \
     python3 \
     python3-lang \
     python3-multiprocessing \
