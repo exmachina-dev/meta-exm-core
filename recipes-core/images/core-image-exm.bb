@@ -8,6 +8,7 @@ LICENSE = "MIT"
 IMAGE_INSTALL += "\
     packagegroup-distro-base \
     ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
+    base-files-armaz-conf \
     useradd-ertza \
     ertza \
 "
