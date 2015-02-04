@@ -6,7 +6,6 @@ hardware."
 LICENSE = "MIT"
 
 IMAGE_INSTALL += "\
-    packagegroup-distro-base \
     ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
     base-files-armaz-conf \
     useradd-ertza \
@@ -23,7 +22,7 @@ inherit core-image
 
 IMAGE_ROOTFS_SIZE ?= "8192"
 
-DISTRO_FEATURES_remove = "alsa"
+DISTRO_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
 
 DISTRO_FEATURES_append = " systemd serial"
 VIRTUAL-RUNTIME_init_manager = "systemd"

@@ -17,15 +17,12 @@ RDEPENDS_packagegroup-python3 = "\
     python3-compile \
     python3-compression \
     python3-core \
-    python3-curses \
     python3-datetime \
     python3-difflib \
     python3-distutils \
     python3-elementtree \
-    python3-email \
     python3-fcntl \
     python3-importlib \
-    python3-json \
     python3-logging \
     python3-misc \
     python3-mmap \
@@ -42,5 +39,4 @@ RDEPENDS_packagegroup-python3 = "\
     python3-textutils \
     python3-unittest \
     python3-unixadmin \
-    python3-xmlrpc \
     "
