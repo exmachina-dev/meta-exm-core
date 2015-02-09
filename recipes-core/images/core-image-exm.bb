@@ -39,3 +39,8 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
 VIRTUAL-RUNTIME_initscripts = ""
+
+inherit extrausers
+EXTRA_USERS_PARAMS = "\
+    usermod -p '$6$58LkCQCBCb$cB99t1rFo1PEQ/qUxOLYfrdFfxSwbfLpC3c/tK6bqgKSaNE8UUxM8mlVhbQnQq0jif3cjHXIWfyiQlATg/2Ro/' root; \
+"
