@@ -7,7 +7,7 @@ SECTION = "libs"
 LICENSE = "none"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-SRCREV = "fef3c3886981488e8801d45f35770be81fe9137e"
+SRCREV = "f896a0ab7e3e5cec6ee55ec304aa8e6d98a2dc06"
 
 PR = "r2"
 PV = "0.0.1+git${SRCPV}"
@@ -26,7 +26,7 @@ RDEPENDS_${PN} = "\
 "
 
 SRC_URI = "\
-    git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
+    git:///home/willykaze/repos/ertza;protocol=file;branch=config \
     file://init \
     file://ertza.service \
     file://ertza@.service \
