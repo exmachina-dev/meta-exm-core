@@ -10,9 +10,12 @@ IMAGE_INSTALL += "\
     base-files-armaz-conf \
     useradd-ertza \
     ertza \
+    opkg \
+    distro-feed-configs \
 "
 
 IMAGE_FEATURES_remove = "splash"
+IMAGE_FEATURES += "package-management"
 
 IMAGE_LINGUAS = " "
 
