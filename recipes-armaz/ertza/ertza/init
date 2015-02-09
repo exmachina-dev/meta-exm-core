@@ -40,20 +40,20 @@ done
 case "$1" in
   start)
 	echo -n "Starting $DESC: "
-	start-stop-daemon -S -p $PIDFILE \
+	start-stop-daemon -S -b -p $PIDFILE \
 	  -x "$DAEMON"
 	echo "$NAME."
 	;;
   stop)
 	echo -n "Stopping $DESC: "
-	start-stop-daemon -K -x "$DAEMON" -p $PIDFILE
+	start-stop-daemon -K -b -x "$DAEMON" -p $PIDFILE
 	echo "$NAME."
 	;;
   restart|force-reload)
 	echo -n "Restarting $DESC: "
-	start-stop-daemon -K -x "$DAEMON" -p $PIDFILE
+	start-stop-daemon -K -b -x "$DAEMON" -p $PIDFILE
 	sleep 1
-	start-stop-daemon -S -p $PIDFILE \
+	start-stop-daemon -S -b -p $PIDFILE \
 	  -x "$DAEMON"
 	echo "$NAME."
 	;;
