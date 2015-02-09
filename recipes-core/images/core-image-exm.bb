@@ -14,6 +14,13 @@ IMAGE_INSTALL += "\
     distro-feed-configs \
 "
 
+IMAGE_INSTALL_remove = "\
+    packagegroup-base-alsa \
+    packagegroup-base-bluetooth \
+    packagegroup-base-3g \
+    packagegroup-base-wifi \
+"
+
 IMAGE_FEATURES_remove = "splash"
 IMAGE_FEATURES += "package-management"
 
