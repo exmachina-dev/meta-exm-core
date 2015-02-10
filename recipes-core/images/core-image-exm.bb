@@ -40,7 +40,10 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
 VIRTUAL-RUNTIME_initscripts = ""
 
-inherit extrausers
-EXTRA_USERS_PARAMS = "\
-    usermod -p '$6$58LkCQCBCb$cB99t1rFo1PEQ/qUxOLYfrdFfxSwbfLpC3c/tK6bqgKSaNE8UUxM8mlVhbQnQq0jif3cjHXIWfyiQlATg/2Ro/' root; \
-"
+ROOTFS_POSTPROCESS_COMMAND += "set_root_passwd;"
+set_root_passwd() {
+   sed 's%^root:[^:]*:%root:$6$Vwwla/7I2eD0$nYDVg6q5A.3gm7RBBysNuRJwsrbw6NXNiIU6Al/Trr3qKSpb98dslQtOQD6gc8z4fQLFx094i4vhqqaR4VZG5/:%' \
+       < ${IMAGE_ROOTFS}/etc/shadow \
+       > ${IMAGE_ROOTFS}/etc/shadow.new;
+   mv ${IMAGE_ROOTFS}/etc/shadow.new ${IMAGE_ROOTFS}/etc/shadow ;
+}
