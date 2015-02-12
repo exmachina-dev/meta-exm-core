@@ -7,10 +7,10 @@ SECTION = "libs"
 LICENSE = "none"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-SRCREV = "7fa0a5635a5c8e3e17efac8b311a4fbb77e8a2bf"
+SRCREV = "4a1522d65fd40fdcae479691714b0f8c1e254ea7"
 
-PR = "r2"
-PV = "0.0.1+git${SRCPV}"
+PR = "r1"
+PV = "0.0.5+git${SRCPV}"
 
 RDEPENDS_${PN} = "\
     packagegroup-python3 \
@@ -22,11 +22,11 @@ RDEPENDS_${PN} = "\
     python3-readline \
     python3-logging \
     python3-pyliblo \
-    python3-pylibmodbus \
+    python3-pymodbus \
 "
 
 SRC_URI = "\
-    git:///home/willykaze/repos/ertza;protocol=file;branch=config \
+    git:///home/willykaze/repos/ertza;protocol=file;branch=pymodbus \
     file://init \
     file://ertza.service \
     file://ertza@.service \
@@ -78,4 +78,8 @@ FILES_${PN} = "${sysconfdir}/init.d/ertza \
                ${systemd_unitdir}/system/ertza.service \
                ${bindir}/ertza \
                ${PYTHON_SITEPACKAGES_DIR}/ertza* \
+"
+
+CONFFILES_${PN} ="\
+    ${sysconfdir}/ertza/default.conf \
 "
