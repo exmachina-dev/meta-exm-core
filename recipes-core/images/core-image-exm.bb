@@ -22,7 +22,7 @@ IMAGE_INSTALL_remove = "\
 "
 
 IMAGE_FEATURES_remove = "splash"
-IMAGE_FEATURES += "package-management"
+IMAGE_FEATURES_append = " package-management"
 
 IMAGE_LINGUAS = " "
 
@@ -39,6 +39,8 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
 VIRTUAL-RUNTIME_initscripts = ""
+
+FEED_DEPLOYDIR_BASE_URI = "http://pkg.exmachina.fr/beaglebone"
 
 ROOTFS_POSTPROCESS_COMMAND += "set_root_passwd;"
 set_root_passwd() {
