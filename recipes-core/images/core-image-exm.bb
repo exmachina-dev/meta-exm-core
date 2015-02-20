@@ -11,18 +11,11 @@ IMAGE_INSTALL += "\
     useradd-ertza \
     ertza \
     opkg \
-    distro-feed-configs \
 "
 
-IMAGE_INSTALL_remove = "\
-    packagegroup-base-alsa \
-    packagegroup-base-bluetooth \
-    packagegroup-base-3g \
-    packagegroup-base-wifi \
-"
+IMAGE_INSTALL_remove = " packagegroup-base-extended psplash-default"
 
-IMAGE_FEATURES_remove = "splash"
-IMAGE_FEATURES_append = " package-management"
+IMAGE_FEATURES += "package-management"
 
 IMAGE_LINGUAS = " "
 
@@ -34,15 +27,12 @@ IMAGE_ROOTFS_SIZE ?= "8192"
 
 DISTRO_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
 
-DISTRO_FEATURES_append = " systemd serial"
-VIRTUAL-RUNTIME_init_manager = "systemd"
-
-DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
-VIRTUAL-RUNTIME_initscripts = ""
+DISTRO_FEATURES_append = " serial"
 
 FEED_DEPLOYDIR_BASE_URI = "http://pkg.exmachina.fr/beaglebone"
 
 ROOTFS_POSTPROCESS_COMMAND += "set_root_passwd;"
+
 set_root_passwd() {
    sed 's%^root:[^:]*:%root:$6$Vwwla/7I2eD0$nYDVg6q5A.3gm7RBBysNuRJwsrbw6NXNiIU6Al/Trr3qKSpb98dslQtOQD6gc8z4fQLFx094i4vhqqaR4VZG5/:%' \
        < ${IMAGE_ROOTFS}/etc/shadow \
