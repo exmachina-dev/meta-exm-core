@@ -7,10 +7,10 @@ SECTION = "libs"
 LICENSE = "none"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-SRCREV = "4a1522d65fd40fdcae479691714b0f8c1e254ea7"
+SRCREV = "b23caad3043daec2966ca817d8a6de412b8c9f68"
 
 PR = "r1"
-PV = "0.0.5+git${SRCPV}"
+PV = "0.0.1+git${SRCPV}"
 
 RDEPENDS_${PN} = "\
     packagegroup-python3 \
@@ -56,6 +56,7 @@ do_install_append() {
 		${D}${bindir} \
 
 	install -m 0755 ${S}/bin/ertza ${D}${bindir}/
+	install -m 0755 ${S}/bin/modbus_rw ${D}${bindir}/
 
 	install -m 0755 ${S}/ertza/default.conf ${D}${sysconfdir}/ertza/
 
@@ -77,6 +78,7 @@ FILES_${PN} = "${sysconfdir}/init.d/ertza \
                ${systemd_unitdir}/system/ertza@.service \
                ${systemd_unitdir}/system/ertza.service \
                ${bindir}/ertza \
+               ${bindir}/modbus_rw \
                ${PYTHON_SITEPACKAGES_DIR}/ertza* \
 "
 
