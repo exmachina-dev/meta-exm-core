@@ -29,6 +29,7 @@ USERADD_PARAM_${PN} = "-u 1200 -d ${_HOMEDIR} -r -s ${_SHELL} -P '${_PASSWD}' ${
 
 do_install () {
         install -d -m 755 ${D}${_HOMEDIR}
+        install -d -m 755 ${D}${_HOMEDIR}/.ertza
         install -d -m 755 ${D}${_HOMEDIR}/.ssh
 
         install -p -m 644 bashrc ${D}${_HOMEDIR}/.bashrc
@@ -39,8 +40,10 @@ do_install () {
         chgrp -R ${_GROUP} ${D}${_HOMEDIR}
 }
 
-FILES_${PN} = "${_HOMEDIR}/.bashrc \
-               ${_HOMEDIR}/.ssh/authorized_keys \
+FILES_${PN} = "\
+    ${_HOMEDIR}/.bashrc \
+    ${_HOMEDIR}/.ertza \
+    ${_HOMEDIR}/.ssh/authorized_keys \
 "
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
