@@ -50,36 +50,37 @@ export STAGING_INCDIR
 export STAGING_LIBDIR
 
 do_install_append() {
-	install -d ${D}${sysconfdir} \
-		${D}${sysconfdir}/init.d \
-		${D}${sysconfdir}/ertza \
-		${D}${bindir} \
+    install -d ${D}${sysconfdir} \
+            ${D}${sysconfdir}/init.d \
+            ${D}${sysconfdir}/ertza \
+            ${D}${bindir} \
 
-	install -m 0755 ${S}/bin/ertza ${D}${bindir}/
-	install -m 0755 ${S}/bin/modbus_rw ${D}${bindir}/
+    install -m 0755 ${S}/bin/ertza ${D}${bindir}/
+    install -m 0755 ${S}/bin/modbus_rw ${D}${bindir}/
 
-	install -m 0755 ${S}/ertza/default.conf ${D}${sysconfdir}/ertza/
+    install -m 0755 ${S}/ertza/default.conf ${D}${sysconfdir}/ertza/
 
-	sed -e 's,/etc,${sysconfdir},g' \
-		-e 's,/usr/sbin,${sbindir},g' \
-		-e 's,/var,${localstatedir},g' \
-		-e 's,/usr/bin,${bindir},g' \
-		-e 's,/usr,${prefix},g' ${WORKDIR}/init > ${D}${sysconfdir}/init.d/ertza
-	chmod 755 ${D}${sysconfdir}/init.d/ertza
+    sed -e 's,/etc,${sysconfdir},g' \
+            -e 's,/usr/sbin,${sbindir},g' \
+            -e 's,/var,${localstatedir},g' \
+            -e 's,/usr/bin,${bindir},g' \
+            -e 's,/usr,${prefix},g' ${WORKDIR}/init > ${D}${sysconfdir}/init.d/ertza
+    chmod 755 ${D}${sysconfdir}/init.d/ertza
 
-	# deal with systemd unit files
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/ertza@.service ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/ertza.service ${D}${systemd_unitdir}/system
+    # deal with systemd unit files
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/ertza@.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/ertza.service ${D}${systemd_unitdir}/system
 }
 
-FILES_${PN} = "${sysconfdir}/init.d/ertza \
-               ${sysconfdir}/ertza/* \
-               ${systemd_unitdir}/system/ertza@.service \
-               ${systemd_unitdir}/system/ertza.service \
-               ${bindir}/ertza \
-               ${bindir}/modbus_rw \
-               ${PYTHON_SITEPACKAGES_DIR}/ertza* \
+FILES_${PN} = "\
+    ${sysconfdir}/init.d/ertza \
+    ${sysconfdir}/ertza/* \
+    ${systemd_unitdir}/system/ertza@.service \
+    ${systemd_unitdir}/system/ertza.service \
+    ${bindir}/ertza \
+    ${bindir}/modbus_rw \
+    ${PYTHON_SITEPACKAGES_DIR}/ertza* \
 "
 
 CONFFILES_${PN} ="\
