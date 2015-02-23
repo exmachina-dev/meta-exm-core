@@ -19,10 +19,9 @@ S = "${WORKDIR}"
 
 inherit useradd
 
-USERADD_PACKAGES = "${PN} useradd-root"
+USERADD_PACKAGES = "${PN}"
 
 USERADD_PARAM_${PN} = "-u 1200 -d ${_HOMEDIR} -r -s ${_SHELL} -P '${_PASSWD}' ${_USER} "
-USERADD_PARAM_useradd-root = "-P '${_PASSWD}' root "
 
 
 #GROUPADD_PARAM_${PN} = "-g 880 ${_GROUP}"
