@@ -15,7 +15,7 @@ IMAGE_INSTALL += "\
 
 IMAGE_INSTALL_remove = " packagegroup-base-extended psplash-default"
 
-IMAGE_FEATURES += "package-management"
+IMAGE_FEATURES = "package-management"
 
 IMAGE_LINGUAS = " "
 

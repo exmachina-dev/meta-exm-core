@@ -7,7 +7,7 @@ SECTION = "libs"
 LICENSE = "none"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-SRCREV = "41ce35778203bfa8960dc476bf9494367987b940"
+SRCREV = "e3d2352d1da020593264ae0f94f7b56d3c7a7e94"
 
 PR = "r1"
 PV = "0.0.1+git${SRCPV}"
@@ -20,13 +20,14 @@ RDEPENDS_${PN} = "\
     python3-subprocess \
     python3-threading \
     python3-readline \
+    python3-pyserial \
     python3-logging \
     python3-pyliblo \
     python3-pymodbus \
 "
 
 SRC_URI = "\
-    git:///home/willykaze/repos/ertza;protocol=file;branch=pymodbus \
+    git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
     file://init \
     file://ertza.service \
     file://ertza@.service \
@@ -59,6 +60,7 @@ do_install_append() {
     install -m 0755 ${S}/bin/modbus_rw ${D}${bindir}/
 
     install -m 0755 ${S}/ertza/default.conf ${D}${sysconfdir}/ertza/
+    sed -i 's#@LOGPATH@#/home/ertza/.ertza#' ${D}${sysconfdir}/ertza/default.conf
 
     sed -e 's,/etc,${sysconfdir},g' \
             -e 's,/usr/sbin,${sbindir},g' \
