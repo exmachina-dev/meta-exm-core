@@ -29,7 +29,7 @@ DISTRO_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseau
 
 DISTRO_FEATURES_append = " serial"
 
-FEED_DEPLOYDIR_BASE_URI = "http://pkg.exmachina.fr/beaglebone"
+IPK_FEED_URIS = "http://pkg.exmachina.fr/beaglebone"
 
 ROOTFS_POSTPROCESS_COMMAND += "set_root_passwd;"
 
