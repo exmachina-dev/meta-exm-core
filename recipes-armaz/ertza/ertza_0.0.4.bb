@@ -7,12 +7,13 @@ SECTION = "libs"
 LICENSE = "none"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-SRCREV = "e3d2352d1da020593264ae0f94f7b56d3c7a7e94"
+SRCREV = "8960a865757f8a14bad522b927d9ce2a713b520e"
 
 PR = "r1"
 PV = "0.0.1+git${SRCPV}"
 
 RDEPENDS_${PN} = "\
+    libgcc \
     packagegroup-python3 \
     python3 \
     python3-lang \
