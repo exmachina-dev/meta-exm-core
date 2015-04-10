@@ -24,6 +24,7 @@ RDEPENDS_${PN} = "\
     python3-logging \
     python3-pyliblo \
     python3-pymodbus \
+    python3-adafruit-beaglebone-io-python \
 "
 
 SRC_URI = "\
