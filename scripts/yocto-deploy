@@ -1,0 +1,81 @@
+#!/usr/bin/zsh
+
+IMAGES_DIR=/home/willykaze/yocto/poky/build/tmp/deploy/images
+TARGET="$1"
+DEST_BOOT="$2"
+DEST_ROOT="$3"
+IMAGE="$4"
+MINIMAL="$5"
+UMOUNT="$6"
+
+if [[ -z $TARGET || -z $DEST_BOOT || -z $DEST_ROOT || -z $IMAGE ]]; then
+    echo "USAGE : $0 TARGET DEST_BOOT DEST_ROOT IMAGE [MINIMAL] [UMOUNT]"
+    exit 1
+fi
+
+SRC_DIR=$IMAGES_DIR/$TARGET
+
+[[ -e $DEST_BOOT ]] || (echo "$DEST_BOOT do not exist. Aborting."; exit 2)
+[[ -e $DEST_ROOT ]] || (echo "$DEST_ROOT do not exist. Aborting."; exit 2)
+
+if [[ -e $SRC_DIR ]]; then
+    cd $SRC_DIR
+    
+    mlo_file="MLO-$TARGET"
+    echo "Copying MLO file to $DEST_BOOT…"
+    if [[ -e $mlo_file ]]; then
+        cp $mlo_file $DEST_BOOT/MLO
+    else
+        echo "Can't find $mlo_file."
+        exit 3
+    fi
+
+    uboot_file="u-boot-$TARGET.img"
+    echo "Copying u-boot file to $DEST_BOOT…"
+    if [[ -e $uboot_file ]]; then
+        cp $uboot_file $DEST_BOOT/u-boot.img
+    else
+       echo "Can't find $uboot_file."
+       exit 3
+   fi
+
+    image_file="$IMAGE-$TARGET.tar.bz2"
+    echo "Extracting $image_file to $DEST_ROOT…"
+    if [[ -e $image_file ]]; then
+        tar -xvf $image_file -C $DEST_ROOT/
+    else
+        echo "Unable to extract $image_file"
+        exit 4
+    fi
+
+    if [[ $MINIMAL == "y" ]]; then
+        echo "Minimal image: Installing uImage, kernel modules and device tree…"
+        uimage_file="uImage-$TARGET.bin"
+        echo "Copying uImage file to $DEST_BOOT…"
+        [[ -e $uimage_file ]] && cp $uimage_file $DEST_ROOT/boot/uImage || (echo "Can't find $uimage_file."; exit 3)
+
+        modules_file="modules-$TARGET.tgz"
+        echo "Installing kernel modules to $DEST_ROOT…"
+        [[ -e $uimage_file ]] && tar -xvf $modules_file -C $DEST_ROOT/ || (echo "Can't find $modules_file."; exit 3)
+
+        if [[ $TARGET == "beaglebone" ]]; then
+            dtb_bone_file="uImage-am335x-bone.dtb"
+            dtb_boneblack_file="uImage-am335x-boneblack.dtb"
+            echo "Installing DTB files to $DEST_ROOT/boot…"
+            [[ -e $dtb_bone_file ]] && cp $dtb_bone_file $DEST_ROOT/boot/am335x-bone.dtb || (echo "Can't find $dtb_bone_file."; exit 3)
+            [[ -e $dtb_boneblack_file ]] && cp $dtb_boneblack_file $DEST_ROOT/boot/am335x-boneblack.dtb || (echo "Can't find $dtb_boneblack_file."; exit 3)
+        fi
+    fi
+
+    if [[ $UMOUNT == "y" ]]; then
+        echo "Unmounting $DEST_BOOT…"
+        umount $DEST_BOOT && echo "Done."
+        echo "Unmounting $DEST_ROOT…"
+        umount $DEST_ROOT && echo "Done."
+    fi
+
+    echo "Done."
+else
+    echo "$SRC_DIR do not exist. Aborting."
+    exit 2
+fi
