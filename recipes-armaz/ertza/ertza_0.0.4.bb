@@ -14,6 +14,7 @@ PV = "0.0.1+git${SRCPV}"
 
 RDEPENDS_${PN} = "\
     libgcc \
+    armaz-dto \
     packagegroup-python3 \
     python3 \
     python3-lang \
