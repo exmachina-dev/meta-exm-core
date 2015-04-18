@@ -12,8 +12,10 @@ PR = "r1"
 PV = "0.0.1"
 
 SRC_URI = "\
-    file://BB-armaz-00A0.dts \
+    file://BB-BONE-ARMAZ-00A0.dtbo \
+    file://BB-BONE-ARMAZ-00A0.dts \
     file://init \
+    file://armaz-dto.sh \
     file://armaz-dto.service \
 "
 
@@ -21,14 +23,22 @@ inherit update-rc.d systemd
 INITSCRIPT_NAME = "armaz-dto"
 INITSCRIPT_PARAMS = "defaults 10"
 
-SYSTEMD_SERVICE_${PN} = "armaz-dto"
+SYSTEMD_SERVICE_${PN} = "armaz-dto.service"
 
 do_install_append() {
-    install -d ${D}${sysconfdir} \
-            ${D}${sysconfdir}/ertza \
+    install -d \
+            ${D}/lib/firmware \
+            ${D}${bindir} \
             ${D}${sysconfdir}/init.d \
+            ${D}${systemd_unitdir}/system
 
-    install -m 0755 ${WORKDIR}/BB-armaz-00A0.dts ${D}${sysconfdir}/ertza/
+    install -m 0644 ${WORKDIR}/BB-BONE-ARMAZ-00A0.dtbo ${D}/lib/firmware/
+    install -m 0644 ${WORKDIR}/BB-BONE-ARMAZ-00A0.dts ${D}/lib/firmware/
+
+    chown xuser:xuser ${D}/lib/firmware/BB-BONE-ARMAZ-00A0.dtbo
+    chown xuser:xuser ${D}/lib/firmware/BB-BONE-ARMAZ-00A0.dts
+
+    install -m 0755 ${WORKDIR}/armaz-dto.sh ${D}${bindir}
 
     sed -e 's,/etc,${sysconfdir},g' \
             -e 's,/usr/sbin,${sbindir},g' \
@@ -38,12 +48,13 @@ do_install_append() {
     chmod 755 ${D}${sysconfdir}/init.d/armaz-dto
 
     # deal with systemd unit files
-    install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/armaz-dto.service ${D}${systemd_unitdir}/system
 }
 
 FILES_${PN} = "\
+    /lib/firmware/BB-BONE-ARMAZ-00A0.dtbo \
+    /lib/firmware/BB-BONE-ARMAZ-00A0.dts \
+    ${bindir}/armaz-dto.sh \
     ${sysconfdir}/init.d/armaz-dto \
-    ${sysconfdir}/ertza/BB-armaz-00A0.dts \
     ${systemd_unitdir}/system/armaz-dto.service \
 "
