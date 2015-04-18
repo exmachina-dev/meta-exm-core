@@ -33,7 +33,6 @@ SRC_URI = "\
     git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
     file://init \
     file://ertza.service \
-    file://ertza@.service \
 "
 
 S = "${WORKDIR}/git"
@@ -74,14 +73,12 @@ do_install_append() {
 
     # deal with systemd unit files
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/ertza@.service ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/ertza.service ${D}${systemd_unitdir}/system
 }
 
 FILES_${PN} = "\
     ${sysconfdir}/init.d/ertza \
     ${sysconfdir}/ertza/* \
-    ${systemd_unitdir}/system/ertza@.service \
     ${systemd_unitdir}/system/ertza.service \
     ${bindir}/ertza \
     ${bindir}/modbus_rw \
