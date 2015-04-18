@@ -15,6 +15,8 @@ _HOMEDIR = "/home/ertza"
 _SHELL = "/bin/sh"
 _PASSWD = "exmachina"
 
+_ROOTDIR = "/home/root"
+
 S = "${WORKDIR}"
 
 inherit useradd
@@ -31,9 +33,12 @@ do_install () {
         install -d -m 755 ${D}${_HOMEDIR}
         install -d -m 755 ${D}${_HOMEDIR}/.ertza
         install -d -m 755 ${D}${_HOMEDIR}/.ssh
+        install -d -m 755 ${D}${_ROOTDIR}
+        install -d -m 755 ${D}${_ROOTDIR}/.ssh
 
         install -p -m 644 bashrc ${D}${_HOMEDIR}/.bashrc
         install -p -m 644 authorized_keys ${D}${_HOMEDIR}/.ssh/authorized_keys
+        install -p -m 644 authorized_keys ${D}${_ROOTDIR}/.ssh/authorized_keys
 
         chown -R ${_USER} ${D}${_HOMEDIR}
 
@@ -44,6 +49,7 @@ FILES_${PN} = "\
     ${_HOMEDIR}/.bashrc \
     ${_HOMEDIR}/.ertza \
     ${_HOMEDIR}/.ssh/authorized_keys \
+    ${_ROOTDIR}/.ssh/authorized_keys \
 "
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
