@@ -1,10 +1,10 @@
 [Unit]
 Description=Ertza Per-Connection server
-After=syslog.target
+After=network.target
 
 [Service]
-EnvironmentFile=-/etc/default/ertza
-ExecStart=-@BINDIR@/ertza $ERTZA_EXTRA_ARGS
+EnvironmentFile=/etc/default/ertza
+ExecStart=@BINDIR@/ertza $ERTZA_EXTRA_ARGS
 ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
 StandardInput=socket
 KillMode=process
