@@ -13,7 +13,7 @@ _USER = "ertza"
 _GROUP = "ertza"
 _HOMEDIR = "/home/ertza"
 _SHELL = "/bin/sh"
-_PASSWD = "exmachina"
+_PASSWD = '$6$ORUv90Oe$3uFnMJDJFskNrkQWVbh1nv5TGB7a8xM3BVNwrJDK0i6W7WkrzO9chWxWvPkmuaUo3vZqnFnpgUPeWSH/bjChD/'
 
 _ROOTDIR = "/home/root"
 
@@ -23,7 +23,7 @@ inherit useradd
 
 USERADD_PACKAGES = "${PN}"
 
-USERADD_PARAM_${PN} = "-u 1200 -d ${_HOMEDIR} -r -s ${_SHELL} -P '${_PASSWD}' ${_USER} "
+USERADD_PARAM_${PN} = "-u 1200 -d ${_HOMEDIR} -r -s ${_SHELL} -p '${_PASSWD}' ${_USER} "
 
 
 #GROUPADD_PARAM_${PN} = "-g 880 ${_GROUP}"

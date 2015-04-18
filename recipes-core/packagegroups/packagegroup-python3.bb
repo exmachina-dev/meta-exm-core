@@ -22,7 +22,6 @@ RDEPENDS_packagegroup-python3 = "\
     python3-distutils \
     python3-elementtree \
     python3-fcntl \
-    python3-importlib \
     python3-logging \
     python3-misc \
     python3-mmap \

@@ -1,4 +1,4 @@
-require recipes-core/images/core-image-base.bb
+require recipes-images/angstrom/console-base-image.bb
 
 SUMMARY = "A console-only image that fully supports the target device \
 hardware."
@@ -13,7 +13,7 @@ IMAGE_INSTALL += "\
     opkg \
 "
 
-IMAGE_INSTALL_remove = " packagegroup-base-extended psplash-default"
+IMAGE_INSTALL_remove = " packagegroup-base-extended psplash-default connman-plugin-wifi"
 
 IMAGE_FEATURES = "package-management"
 
@@ -26,6 +26,7 @@ inherit core-image
 IMAGE_ROOTFS_SIZE ?= "8192"
 
 DISTRO_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
+MACHINE_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
 
 DISTRO_FEATURES_append = " serial"
 
@@ -34,8 +35,11 @@ IPK_FEED_URIS = "http://pkg.exmachina.fr/beaglebone"
 ROOTFS_POSTPROCESS_COMMAND += "set_root_passwd;"
 
 set_root_passwd() {
-   sed 's%^root:[^:]*:%root:$6$Vwwla/7I2eD0$nYDVg6q5A.3gm7RBBysNuRJwsrbw6NXNiIU6Al/Trr3qKSpb98dslQtOQD6gc8z4fQLFx094i4vhqqaR4VZG5/:%' \
-       < ${IMAGE_ROOTFS}/etc/shadow \
-       > ${IMAGE_ROOTFS}/etc/shadow.new;
-   mv ${IMAGE_ROOTFS}/etc/shadow.new ${IMAGE_ROOTFS}/etc/shadow ;
+    _passwd='$6$ORUv90Oe$3uFnMJDJFskNrkQWVbh1nv5TGB7a8xM3BVNwrJDK0i6W7WkrzO9chWxWvPkmuaUo3vZqnFnpgUPeWSH/bjChD/'
+    sed "s%^root:[^:]*:%root:${_passwd}:%" \
+        < ${IMAGE_ROOTFS}/etc/shadow \
+        > ${IMAGE_ROOTFS}/etc/shadow.new;
+    mv ${IMAGE_ROOTFS}/etc/shadow.new ${IMAGE_ROOTFS}/etc/shadow ;
 }
+
+export IMAGE_BASENAME = "core-image-exm"
