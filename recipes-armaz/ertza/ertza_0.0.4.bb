@@ -41,7 +41,7 @@ inherit setuptools3 update-rc.d systemd
 INITSCRIPT_NAME = "ertza"
 INITSCRIPT_PARAMS = "defaults 10"
 
-SYSTEMD_SERVICE_${PN} = "ertza"
+SYSTEMD_SERVICE_${PN} = "ertza.service"
 
 
 BINCOMMANDS = "ertza"
