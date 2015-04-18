@@ -12,15 +12,10 @@ PR = "r1"
 PV = "0.0.1"
 
 SRC_URI = "\
-<<<<<<< HEAD
     file://BB-BONE-ARMAZ-00A0.dtbo \
     file://BB-BONE-ARMAZ-00A0.dts \
     file://init \
     file://armaz-dto.sh \
-=======
-    file://BB-armaz-00A0.dts \
-    file://init \
->>>>>>> b9acfeb2b30ce02cf34da54c857a7f727d6c9a6b
     file://armaz-dto.service \
 "
 
