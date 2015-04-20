@@ -40,6 +40,11 @@ set_root_passwd() {
         < ${IMAGE_ROOTFS}/etc/shadow \
         > ${IMAGE_ROOTFS}/etc/shadow.new;
     mv ${IMAGE_ROOTFS}/etc/shadow.new ${IMAGE_ROOTFS}/etc/shadow ;
+
+    sed "s%^root:[^:]*:%root:x:%" \
+        < ${IMAGE_ROOTFS}/etc/passwd \
+        > ${IMAGE_ROOTFS}/etc/passwd;
+    mv ${IMAGE_ROOTFS}/etc/passwd ${IMAGE_ROOTFS}/etc/passwd ;
 }
 
 export IMAGE_BASENAME = "core-image-exm"
