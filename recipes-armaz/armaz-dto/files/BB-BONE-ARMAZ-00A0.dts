@@ -109,7 +109,7 @@
     fragment@3 {
         target = <&ocp>;
         __overlay__ {
-            pwm_test_fan_0 {
+            pwm_fan_0 {
                 compatible	= "pwm_test";
                 pwms 		= <&ehrpwm2 1 500000 1>;
                 pwm-names 	= "FAN_0";
@@ -121,7 +121,7 @@
                 duty		= <0>;
                 status 		= "okay";
             };
-            pwm_test_fan_1 {
+            pwm_fan_1 {
                 compatible	= "pwm_test";
                 pwms 		= <&ehrpwm2 1 500000 1>;
                 pwm-names 	= "FAN_1";
