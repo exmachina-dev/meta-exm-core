@@ -13,7 +13,7 @@ _USER = "ertza"
 _GROUP = "ertza"
 _HOMEDIR = "/home/ertza"
 _SHELL = "/bin/sh"
-_PASSWD = '$6$ORUv90Oe$3uFnMJDJFskNrkQWVbh1nv5TGB7a8xM3BVNwrJDK0i6W7WkrzO9chWxWvPkmuaUo3vZqnFnpgUPeWSH/bjChD/'
+_PASSWD = '\$6\$ORUv90Oe\$3uFnMJDJFskNrkQWVbh1nv5TGB7a8xM3BVNwrJDK0i6W7WkrzO9chWxWvPkmuaUo3vZqnFnpgUPeWSH/bjChD/'
 
 _ROOTDIR = "/home/root"
 
