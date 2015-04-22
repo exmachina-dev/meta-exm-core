@@ -5,6 +5,7 @@ After=armaz-dto.service
 [Service]
 User=ertza
 Group=root
+ExecStartPre=-/usr/bin/ertza-ip.sh
 ExecStart=/usr/bin/ertza
 KillMode=process
 

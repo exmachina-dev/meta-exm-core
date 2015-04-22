@@ -34,6 +34,7 @@ RDEPENDS_${PN} = "\
 SRC_URI = "\
     git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
     file://ertza.service \
+    file://ertza-ip.sh \
 "
 
 S = "${WORKDIR}/git"
@@ -56,6 +57,7 @@ do_install_append() {
             ${D}${bindir} \
 
     install -m 0755 ${S}/bin/ertza ${D}${bindir}/
+    install -m 0755 ${WORKDIR}/ertza-ip.sh ${D}${bindir}/
     install -m 0755 ${S}/bin/modbus_rw ${D}${bindir}/
 
     install -m 0755 ${S}/ertza/default.conf ${D}${sysconfdir}/ertza/
@@ -76,6 +78,7 @@ FILES_${PN} = "\
     ${sysconfdir}/ertza/* \
     ${systemd_unitdir}/system/ertza.service \
     ${bindir}/ertza \
+    ${bindir}/ertza-ip.sh \
     ${bindir}/modbus_rw \
     ${PYTHON_SITEPACKAGES_DIR}/ertza* \
 "
