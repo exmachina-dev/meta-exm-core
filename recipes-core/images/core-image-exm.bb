@@ -1,4 +1,4 @@
-require recipes-images/angstrom/console-base-image.bb
+require recipes-images/angstrom/angstrom-image.bb
 
 SUMMARY = "A console-only image that fully supports the target device \
 hardware."
@@ -6,29 +6,27 @@ hardware."
 LICENSE = "MIT"
 
 IMAGE_INSTALL += "\
-    ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
-    base-files-armaz-conf \
     useradd-ertza \
     ertza \
     opkg \
 "
 
-IMAGE_INSTALL_remove = " packagegroup-base-extended psplash-default connman-plugin-wifi"
+#IMAGE_INSTALL_remove = " packagegroup-base-extended psplash-default"
 
-IMAGE_FEATURES = "package-management"
+IMAGE_FEATURES_append = " package-management"
 
 IMAGE_LINGUAS = " "
 
 LICENSE = "MIT"
 
-inherit core-image
-
 IMAGE_ROOTFS_SIZE ?= "8192"
 
-DISTRO_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
-MACHINE_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
+DISTRO_FEATURES_remove = "alsa x11 nfs bluetooth wifi opengl pulseaudio 3g irda tk"
+#MACHINE_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
 
-DISTRO_FEATURES_append = " serial"
+#DISTRO_FEATURES_append = " serial usbnet"
+
+CONMANPKGS_remove = "connman-plugin-wifi"
 
 IPK_FEED_URIS = "http://pkg.exmachina.fr/beaglebone"
 
@@ -43,8 +41,8 @@ set_root_passwd() {
 
     sed "s%^root:[^:]*:%root:x:%" \
         < ${IMAGE_ROOTFS}/etc/passwd \
-        > ${IMAGE_ROOTFS}/etc/passwd;
-    mv ${IMAGE_ROOTFS}/etc/passwd ${IMAGE_ROOTFS}/etc/passwd ;
+        > ${IMAGE_ROOTFS}/etc/passwd.new;
+    mv ${IMAGE_ROOTFS}/etc/passwd.new ${IMAGE_ROOTFS}/etc/passwd ;
 }
 
 export IMAGE_BASENAME = "core-image-exm"
