@@ -1,10 +1,12 @@
 [Unit]
-Description=Ertza Per-Connection server
-After=network.target
+Description=Ertza server
+After=armaz-dto.service
 
 [Service]
-EnvironmentFile=/etc/default/ertza
-ExecStart=@BINDIR@/ertza $ERTZA_EXTRA_ARGS
-ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
-StandardInput=socket
+User=ertza
+Group=root
+ExecStart=/usr/bin/ertza
 KillMode=process
+
+[Install]
+WantedBy=multi-user.target
