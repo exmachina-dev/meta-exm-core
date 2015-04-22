@@ -1,3 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
-echo BB-ARMAZ:00A0 > /sys/devices/bone_capemgr.9/slots
+echo BB-BONE-ARMAZ:00A0 > /sys/devices/bone_capemgr.9/slots
+exit 0
