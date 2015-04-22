@@ -35,8 +35,8 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/BB-BONE-ARMAZ-00A0.dtbo ${D}/lib/firmware/
     install -m 0644 ${WORKDIR}/BB-BONE-ARMAZ-00A0.dts ${D}/lib/firmware/
 
-    chown xuser:xuser ${D}/lib/firmware/BB-BONE-ARMAZ-00A0.dtbo
-    chown xuser:xuser ${D}/lib/firmware/BB-BONE-ARMAZ-00A0.dts
+    chown 1000:1000 ${D}/lib/firmware/BB-BONE-ARMAZ-00A0.dtbo
+    chown 1000:1000 ${D}/lib/firmware/BB-BONE-ARMAZ-00A0.dts
 
     install -m 0755 ${WORKDIR}/armaz-dto.sh ${D}${bindir}
 
