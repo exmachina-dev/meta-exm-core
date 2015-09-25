@@ -25,6 +25,7 @@ DISTRO_FEATURES_remove = "alsa x11 nfs bluetooth wifi opengl pulseaudio 3g irda 
 #MACHINE_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
 
 #DISTRO_FEATURES_append = " serial usbnet"
+DISTRO_FEATURES_append = "tsp65217"
 
 CONMANPKGS_remove = "connman-plugin-wifi"
 

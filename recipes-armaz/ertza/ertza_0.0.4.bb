@@ -7,7 +7,7 @@ SECTION = "libs"
 LICENSE = "none"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-SRCREV = "971a6133f235c77b14b16b7b446b7b358752ddaa"
+SRCREV = "a797a4e4382d786edb7e23452256ae0a41257676"
 
 PR = "r1"
 PV = "0.0.1+git${SRCPV}"
@@ -32,9 +32,9 @@ RDEPENDS_${PN} = "\
 "
 
 SRC_URI = "\
-    git:///home/willykaze/repos/ertza;protocol=file;branch=beaglebone \
+    git:///home/willykaze/repos/ertza;protocol=file;branch=pel \
     file://ertza.service \
-    file://ertza-ip.sh \
+    file://10-eth0.network \
 "
 
 S = "${WORKDIR}/git"
@@ -57,14 +57,15 @@ do_install_append() {
             ${D}${bindir} \
 
     install -m 0755 ${S}/bin/ertza ${D}${bindir}/
-    install -m 0755 ${WORKDIR}/ertza-ip.sh ${D}${bindir}/
+    install -m 0755 ${S}/bin/pedale ${D}${bindir}/
     install -m 0755 ${S}/bin/modbus_rw ${D}${bindir}/
 
-    install -m 0755 ${S}/ertza/default.conf ${D}${sysconfdir}/ertza/
+    install -m 0755 ${S}/ertza/armazb.conf ${D}${sysconfdir}/ertza/default.conf
     sed -i 's#@LOGPATH@#/home/ertza/.ertza#' ${D}${sysconfdir}/ertza/default.conf
 
     # deal with systemd unit files
     install -d ${D}${systemd_unitdir}/system
+    install -d ${D}${sysconfdir}/systemd/network
 
     sed -e 's,/etc,${sysconfdir},g' \
             -e 's,/usr/sbin,${sbindir},g' \
@@ -72,14 +73,17 @@ do_install_append() {
             -e 's,/usr/bin,${bindir},g' \
             -e 's,/usr,${prefix},g' ${WORKDIR}/ertza.service > ${D}${systemd_unitdir}/system/ertza.service
     chmod 644 ${D}${systemd_unitdir}/system/ertza.service
+
+    install -m 0644 ${WORKDIR}/10-eth0.network ${D}${sysconfdir}/systemd/network/
 }
 
 FILES_${PN} = "\
     ${sysconfdir}/ertza/* \
     ${systemd_unitdir}/system/ertza.service \
+    ${sysconfdir}/systemd/network/10-eth0.network \
     ${bindir}/ertza \
-    ${bindir}/ertza-ip.sh \
     ${bindir}/modbus_rw \
+    ${bindir}/pedale \
     ${PYTHON_SITEPACKAGES_DIR}/ertza* \
 "
 

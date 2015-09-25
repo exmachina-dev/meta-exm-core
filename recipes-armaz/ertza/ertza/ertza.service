@@ -3,10 +3,9 @@ Description=Ertza server
 After=armaz-dto.service
 
 [Service]
-User=ertza
+User=root
 Group=root
-ExecStartPre=-/usr/bin/ertza-ip.sh
-ExecStart=/usr/bin/ertza
+ExecStart=/usr/bin/pedale --disable-rf
 KillMode=process
 
 [Install]

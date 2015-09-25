@@ -3,7 +3,7 @@
 
 I='eth0'
 
-BINDIR='/usr/bin'
+BINDIR='/sbin'
 
 SRC='192.168.100.1'
 TARGET='192.168.100.2'
