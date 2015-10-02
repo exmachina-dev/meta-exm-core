@@ -5,77 +5,127 @@
     compatible = "ti,beaglebone", "ti,beaglebone-black";
 
     /* identification */
-    part-number = "BB-BONE-ARMAZ";
+    part-number = "BB-BONE-ARMAZCAPE";
     version = "00A0";
 
     /* state the resources this cape uses or prepare to get winged! */
     exclusive-use =
         /* the pin header P8 uses   */
-        "P8.11", /* SWITCH_0        */
-        "P8.12", /* SWITCH_1        */
-        "P8.14", /* SWITCH_2        */
-        "P8.13", /* FAN_0           */
-        "P8.19", /* FAN_1           */
+        "P8.3", /* SWITCH_EXT0        */
+        "P8.4", /* SWITCH_EXT1        */
+        "P8.5", /* SWITCH_EXT2        */
+        "P8.6", /* SWITCH_EXT3        */
+        "P8.37", /* UART5_TXD           */
+        "P8.38", /* UART5_RXD           */
         /* the pin header P9 uses   */
-        "P9.21", /* uart2_txd       */
-        "P9.22", /* uart2_rxd       */
-        "P9.39", /* TEMP_0          */
-        "P9.40", /* TEMP_1          */
+        "P9.11", /* UART4_RXD           */
+        "P9.15", /* SWITCH_2           */
+        "P9.16", /* SWITCH_3           */
+        "P9.23", /* SWITCH_1           */
+        "P9.25", /* SWITCH_0           */
+        "P9.28", /* SPI1_CS0           */
+        "P9.29", /* SPI1_MISO           */
+        "P9.30", /* SPI1_MOSI           */
+        "P9.31", /* SPI1_SCLK           */
+        "P9.37", /* TERM_EXT2           */
+        "P9.39", /* TERM_EXT0           */
+        "P9.40", /* TERM_EXT1           */
+        "P9.42", /* SPI1_CS1           */
         /* the hardware IP uses     */
-        "uart2", "ehrpwm2A", "ehrpwm2B";
+        "uart4", "uart5";
 
     fragment@0 {
         target = <&am33xx_pinmux>;
         __overlay__ {
             switch_pins: pinmux_switch_pins {
                 pinctrl-single,pins = <
-                    0x034 0x37 // P8_11 (22) = switch_0 = GPIO1_13
-                    0x030 0x37 // P8_12 (23) = switch_1 = GPIO1_12
-                    0x028 0x37 // P8_14 (5)  = switch_2 = GPIO0_26
+                    // GPIO Settings
+                    // 6            5               4           3                   2,1,0
+                    // Slew ctl     Receiver active Pullup/down Enable pullup/down  Mux mode
+                    // 0 Fast       0 Disable       0 Pulldown  0 Enabled           000 for mode 0
+                    // 1 Slow       1 Enable        1 Pullup    1 Disabled          111 for mode 7
+                    //
+                    // OUTPUT GPIO(mode 7)  0X07 pulldown, 0x17 pullup, 0x?f no pullup/down
+                    // INPUT GPIO(mode 7)   0X27 pulldown, 0x37 pullup, 0x?f no pullup/down
+
+                    0x018 0x37 // P8_3 () = SWITCH_EXT0 = GPIO1_6
+                    0x01C 0x37 // P8_4 () = SWITCH_EXT1 = GPIO1_7
+                    0x008 0x37 // P8_5 () = SWITCH_EXT2 = GPIO0_2
+                    0x00C 0x37 // P8_6 () = SWITCH_EXT3 = GPIO0_3
+                    0x040 0x37 // P9_15 () = SWITCH_0 = GPIO1_16
+                    0x04C 0x37 // P9_16 () = SWITCH_1 = GPIO1_19
+                    0x044 0x37 // P9_23 () = SWITCH_2 = GPIO1_17
+                    0x1AC 0x37 // P9_25 () = SWITCH_3 = GPIO1_21
                 >;
             };
-            bb_uart2_pins: pinmux_bb_uart2_pins {
+            bb_uart4_pins: pinmux_bb_uart4_pins {
                 pinctrl-single,pins = <
-                    0x150 0x21      /* spi0_sclk.uart2_rxd | MODE1  */
-                    0x154 0x01      /* spi0_d0.uart2_txd | MODE1    */
+                    0x150 0x36 // UART4_RXD.uart4_rxd | MODE6
                 >;
             };
-            fan_0: pinmux_fan_0_pins {
-                pinctrl-single,pins = <0x024  0x4>; /* P8_13 (ZCZ ball T10) | MODE 4 */
+            bb_uart5_pins: pinmux_bb_uart5_pins {
+                pinctrl-single,pins = <
+                    0x0C0 0x14 // UART5_TXD.uart5_txd | MODE4
+                    0x0C4 0x34 // UART5_RXD.uart5_rxd | MODE4
+                >;
             };
-            fan_1: pinmux_fan_1_pins {
-                pinctrl-single,pins = <0x020  0x4>; /* P8_19 (ZCZ ball U10) | MODE 4 */
+            bb_spi1_pins: pinmux_spi1_pins {
+                pinctrl-single,pins = <
+                    0x190 0x13 // P9_31 = SPI1_SCLK.spi1_sclk | MODE3 | OUTPUT_PULLUP
+                    0x194 0x33 // P9_29 = SPI1_MISO.spi1_d0 | MODE3 | INPUT_PULLUP
+                    0x198 0x13 // P9_30 = SPI1_MOSI.spi1_d1 | MODE3 | OUTPUT_PULLUP
+                    0x19C 0x13 // P9_28 = SPI1_CS0.spi1_cs0 | MODE3 | OUTPUT_PULLUP
+                    0x164 0x12 // P9_42 = GPIO0_7.spi1_cs1 | MODE2 | OUTPUT_PULLUP
+                >;
             };
         };
     };
 
     fragment@1 {
-        target = <&ocp>;
+        target = <&uart5>;  /* really uart4 */
         __overlay__ {
-            /* avoid stupid warning */
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&bb_uart4_pins>;
+        };
+    };
+
+    fragment@2 {
+        target = <&uart6>;  /* really uart5 */
+        __overlay__ {
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&bb_uart5_pins>;
+        };
+    };
+
+    fragment@3 {
+        target = <&spi1>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&bb_spi1_pins>;
+            cs-gpios = <&gpio0 7 0
+                        &gpio3 17 0>;
+
+            can_bus {
+                #address-cells = <1>;
+                #size-cells = <0>;
+                compatible = "spidev";
+                reg = <0>;
+                spi-max-frequency = <16000000>;
+            };
+        };
+    };
+
+    fragment@4 {
+        target = <&baseboard_beaglebone_black>;
+        __overlay__ {
             #address-cells = <1>;
             #size-cells = <1>;
 
-            tscadc {
-                compatible = "ti,ti-tscadc";
-                reg = <0x44e0d000 0x1000>;
-
-                interrupt-parent = <&intc>;
-                interrupts = <16>;
-                ti,hwmods = "adc_tsc";
-                status = "okay";
-
-                adc {
-                    ti,adc-channels = <0 1>;
-                };
-            };
-
-            thermistors {
-                compatible = "bone-iio-helper";
-                vsense-name  = "AIN0", "AIN1";
-                vsense-scale = <100     100>;
-                status = "okay";
-            };
             gpio_keys {
                 compatible = "gpio-keys";
                 pinctrl-names = "default";
@@ -83,67 +133,77 @@
                 #address-cells = <1>;
                 #size-cells = <0>;
 
+                switch_ext0 {
+                    label = "switch_ext0";
+                    debounce_interval = <50>;
+                    linux,code = <112>;
+                    gpios = <&gpio1 6 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_ext1 {
+                    label = "switch_ext1";
+                    debounce_interval = <50>;
+                    linux,code = <113>;
+                    gpios = <&gpio1 7 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_ext2 {
+                    label = "switch_ext2";
+                    debounce_interval = <50>;
+                    linux,code = <114>;
+                    gpios = <&gpio0 2 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_ext3 {
+                    label = "switch_ext3";
+                    debounce_interval = <50>;
+                    linux,code = <115>;
+                    gpios = <&gpio0 3 0x5>;
+                    gpio-key,wakeup;
+                };
+
                 switch_0 {
                     label = "switch_0";
                     debounce_interval = <50>;
-                    linux,code = <1>;
-                    gpios = <&gpio2 13 0x5>;
+                    linux,code = <90>;
+                    gpios = <&gpio1 16 0x5>;
                     gpio-key,wakeup;
                 };
                 switch_1 {
                     label = "switch_1";
                     debounce_interval = <50>;
-                    linux,code = <2>;
-                    gpios = <&gpio2 12 0x5>;
+                    linux,code = <91>;
+                    gpios = <&gpio1 19 0x5>;
                     gpio-key,wakeup;
                 };
                 switch_2 {
                     label = "switch_2";
                     debounce_interval = <50>;
-                    linux,code = <3>;
-                    gpios = <&gpio1 26 0x5>;
+                    linux,code = <92>;
+                    gpios = <&gpio1 17 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_3 {
+                    label = "switch_3";
+                    debounce_interval = <50>;
+                    linux,code = <94>;
+                    gpios = <&gpio1 21 0x5>;
                     gpio-key,wakeup;
                 };
             };
         };
     };
 
-    fragment@2 {
-        target = <&ocp>;
+    fragment@5 {
+        target = <&tscadc>;
         __overlay__ {
-            pwm_fan_0 {
-                compatible	= "pwm_test";
-                pwms 		= <&ehrpwm2 1 500000 1>;
-                pwm-names 	= "FAN_0";
+            tscadc {
+                status = "okay";
 
-                pinctrl-names	= "default";
-                pinctrl-0	= <&fan_0>;
-
-                enabled		= <1>;
-                duty		= <0>;
-                status 		= "okay";
+                adc {
+                    ti,adc-channels = <0 1 2>;
+                };
             };
-            pwm_fan_1 {
-                compatible	= "pwm_test";
-                pwms 		= <&ehrpwm2 1 500000 1>;
-                pwm-names 	= "FAN_1";
-
-                pinctrl-names	= "default";
-                pinctrl-0	= <&fan_1>;
-
-                enabled		= <1>;
-                duty		= <0>;
-                status 		= "okay";
-            };
-        };
-    };
-
-    fragment@3 {
-        target = <&uart3>;  /* really uart2 */
-        __overlay__ {
-            status = "okay";
-            pinctrl-names = "default";
-            pinctrl-0 = <&bb_uart2_pins>;
         };
     };
 };
