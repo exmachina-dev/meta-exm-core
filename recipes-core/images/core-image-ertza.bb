@@ -1,4 +1,4 @@
-require recipes-images/angstrom/angstrom-image.bb
+require recipes-core/images/core-image-minimal.bb
 
 SUMMARY = "A console-only image that fully supports the target device \
 hardware."
@@ -10,6 +10,7 @@ IMAGE_INSTALL += "\
     ertza \
     opkg \
 "
+###     ertza
 
 #IMAGE_INSTALL_remove = " packagegroup-base-extended psplash-default"
 
@@ -20,6 +21,9 @@ IMAGE_LINGUAS = " "
 LICENSE = "MIT"
 
 IMAGE_ROOTFS_SIZE ?= "8192"
+IMAGE_EXTRA_SPACE = "202048"
+
+CORE_IMAGE_EXTRA_INSTALL += "kernel-modules kernel-devicetree"
 
 DISTRO_FEATURES_remove = "alsa x11 nfs bluetooth wifi opengl pulseaudio 3g irda tk"
 #MACHINE_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
@@ -46,4 +50,4 @@ set_root_passwd() {
     mv ${IMAGE_ROOTFS}/etc/passwd.new ${IMAGE_ROOTFS}/etc/passwd ;
 }
 
-export IMAGE_BASENAME = "core-image-exm"
+export IMAGE_BASENAME = "core-image-ertza"
