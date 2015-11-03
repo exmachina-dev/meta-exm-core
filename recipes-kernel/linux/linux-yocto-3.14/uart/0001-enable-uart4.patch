@@ -1,14 +1,14 @@
-From b675fa2b0b13a2fc95abbd7b61f66c84069b9c15 Mon Sep 17 00:00:00 2001
+From f80a31f2de86ab87120a6dca9a55f55a16424179 Mon Sep 17 00:00:00 2001
 From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
 Date: Tue, 3 Nov 2015 12:51:39 +0100
 Subject: [PATCH 1/2] enable uart4
 
 ---
- arch/arm/boot/dts/am335x-bone-common.dtsi |   14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ arch/arm/boot/dts/am335x-bone-common.dtsi |   13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
 diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335x-bone-common.dtsi
-index 2e7d932..5bdd880 100644
+index 2e7d932..5571e0b 100644
 --- a/arch/arm/boot/dts/am335x-bone-common.dtsi
 +++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
 @@ -91,6 +91,12 @@
@@ -17,18 +17,18 @@ index 2e7d932..5bdd880 100644
  
 +        uart4_pins: pinmux_uart4_pins {
 +		pinctrl-single,pins = <
-+			0x150 (PIN_INPUT_PULLUP | MUX_MODE6)	/* uart0_rxd.uart0_rxd */
++			0x150 (PIN_INPUT_PULLUP | MUX_MODE6)	/* uart4_rxd.uart4_rxd */
 +		>;
 +        };
 +
  	clkout2_pin: pinmux_clkout2_pin {
  		pinctrl-single,pins = <
  			0x1b4 (PIN_OUTPUT_PULLDOWN | MUX_MODE3)	/* xdma_event_intr1.clkout2 */
-@@ -180,6 +187,13 @@
+@@ -180,6 +186,13 @@
  	status = "okay";
  };
  
-+&uart5 {
++&uart5 {                                                       /* really uart4 */
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&uart4_pins>;
 +
