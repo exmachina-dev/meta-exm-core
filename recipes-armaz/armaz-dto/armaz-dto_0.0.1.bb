@@ -18,6 +18,8 @@ SRC_URI = "\
     file://armaz-dto.service \
 "
 
+S = "${WORKDIR}"
+
 inherit systemd
 
 SYSTEMD_SERVICE_${PN} = "armaz-dto.service"
@@ -27,6 +29,9 @@ do_install_append() {
             ${D}/lib/firmware \
             ${D}${bindir} \
             ${D}${systemd_unitdir}/system
+
+    # Curently not working
+    #dtc -O dtb -o ${WORKDIR}/BB-BONE-ARMAZ-00A0.dtbo -b 0 -@ ${WORKDIR}/BB-BONE-ARMAZ-00A0.dts
 
     install -m 0644 ${WORKDIR}/BB-BONE-ARMAZ-00A0.dtbo ${D}/lib/firmware/
     install -m 0644 ${WORKDIR}/BB-BONE-ARMAZ-00A0.dts ${D}/lib/firmware/

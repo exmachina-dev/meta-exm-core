@@ -71,7 +71,7 @@
             };
             bb_spi1_pins: pinmux_spi1_pins {
                 pinctrl-single,pins = <
-                    0x190 0x13 // P9_31 = SPI1_SCLK.spi1_sclk | MODE3 | OUTPUT_PULLUP
+                    0x190 0x33 // P9_31 = SPI1_SCLK.spi1_sclk | MODE3 | INPUT_PULLUP
                     0x194 0x33 // P9_29 = SPI1_MISO.spi1_d0 | MODE3 | INPUT_PULLUP
                     0x198 0x13 // P9_30 = SPI1_MOSI.spi1_d1 | MODE3 | OUTPUT_PULLUP
                     0x19C 0x13 // P9_28 = SPI1_CS0.spi1_cs0 | MODE3 | OUTPUT_PULLUP
@@ -107,13 +107,13 @@
             status = "okay";
             pinctrl-names = "default";
             pinctrl-0 = <&bb_spi1_pins>;
-            cs-gpios = <&gpio0 7 0
-                        &gpio3 17 0>;
+            cs-gpios = <&gpio1 7 0
+                        &gpio4 17 0>;
 
-            can_bus {
+            spidev@0 {
                 #address-cells = <1>;
                 #size-cells = <0>;
-                compatible = "spidev";
+                compatible = "linux,spidev";
                 reg = <0>;
                 spi-max-frequency = <16000000>;
             };
@@ -137,28 +137,28 @@
                     label = "switch_ext0";
                     debounce_interval = <50>;
                     linux,code = <112>;
-                    gpios = <&gpio1 6 0x5>;
+                    gpios = <&gpio2 6 0x5>;
                     gpio-key,wakeup;
                 };
                 switch_ext1 {
                     label = "switch_ext1";
                     debounce_interval = <50>;
                     linux,code = <113>;
-                    gpios = <&gpio1 7 0x5>;
+                    gpios = <&gpio2 7 0x5>;
                     gpio-key,wakeup;
                 };
                 switch_ext2 {
                     label = "switch_ext2";
                     debounce_interval = <50>;
                     linux,code = <114>;
-                    gpios = <&gpio0 2 0x5>;
+                    gpios = <&gpio1 2 0x5>;
                     gpio-key,wakeup;
                 };
                 switch_ext3 {
                     label = "switch_ext3";
                     debounce_interval = <50>;
                     linux,code = <115>;
-                    gpios = <&gpio0 3 0x5>;
+                    gpios = <&gpio1 3 0x5>;
                     gpio-key,wakeup;
                 };
 
@@ -166,28 +166,28 @@
                     label = "switch_0";
                     debounce_interval = <50>;
                     linux,code = <90>;
-                    gpios = <&gpio1 16 0x5>;
+                    gpios = <&gpio2 16 0x5>;
                     gpio-key,wakeup;
                 };
                 switch_1 {
                     label = "switch_1";
                     debounce_interval = <50>;
                     linux,code = <91>;
-                    gpios = <&gpio1 19 0x5>;
+                    gpios = <&gpio2 19 0x5>;
                     gpio-key,wakeup;
                 };
                 switch_2 {
                     label = "switch_2";
                     debounce_interval = <50>;
                     linux,code = <92>;
-                    gpios = <&gpio1 17 0x5>;
+                    gpios = <&gpio2 17 0x5>;
                     gpio-key,wakeup;
                 };
                 switch_3 {
                     label = "switch_3";
                     debounce_interval = <50>;
                     linux,code = <94>;
-                    gpios = <&gpio1 21 0x5>;
+                    gpios = <&gpio2 21 0x5>;
                     gpio-key,wakeup;
                 };
             };
