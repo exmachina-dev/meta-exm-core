@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 SRCREV = "d211f69cd36497053e8f4b3cc25286bb1825e0d3"
 
 PR = "r1"
-PV = "0.0.1"
+PV = "0.0.2"
 
-_DTO_REV = "00A0"
+_DTO_REV = "00B1"
 
 require armaz-dto.inc

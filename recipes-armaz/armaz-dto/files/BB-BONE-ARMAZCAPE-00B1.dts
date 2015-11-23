@@ -1,0 +1,240 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+    /* identification */
+    part-number = "BB-BONE-ARMAZCAPE";
+    version = "00B1";
+
+    /* state the resources this cape uses or prepare to get winged! */
+    exclusive-use =
+        /* the pin header P8 uses   */
+        "P8.7", /* SWITCH_EXT0        */
+        "P8.8", /* SWITCH_EXT1        */
+        "P8.9", /* SWITCH_EXT2        */
+        "P8.10", /* SWITCH_EXT3        */
+        "P8.37", /* UART5_TXD           */
+        "P8.38", /* UART5_RXD           */
+        /* the pin header P9 uses   */
+        "P9.11", /* UART4_RXD           */
+        "P9.15", /* SWITCH_2           */
+        "P9.16", /* SWITCH_3           */
+        "P9.19", /* I2C2_SDA            */
+        "P9.20", /* I2C2_SCL            */
+        "P9.23", /* SWITCH_1           */
+        "P9.25", /* SWITCH_0           */
+        "P9.28", /* SPI1_CS0           */
+        "P9.29", /* SPI1_MISO           */
+        "P9.30", /* SPI1_MOSI           */
+        "P9.31", /* SPI1_SCLK           */
+        "P9.37", /* TERM_EXT2           */
+        "P9.39", /* TERM_EXT0           */
+        "P9.40", /* TERM_EXT1           */
+        "P9.42", /* SPI1_CS1           */
+        /* the hardware IP uses     */
+        "i2c2", "spi1", "uart4", "uart5", "tscadc";
+
+    fragment@0 {
+        target = <&am33xx_pinmux>;
+        __overlay__ {
+            switch_pins: pinmux_switch_pins {
+                pinctrl-single,pins = <
+                    // GPIO Settings
+                    // 6            5               4           3                   2,1,0
+                    // Slew ctl     Receiver active Pullup/down Enable pullup/down  Mux mode
+                    // 0 Fast       0 Disable       0 Pulldown  0 Enabled           000 for mode 0
+                    // 1 Slow       1 Enable        1 Pullup    1 Disabled          111 for mode 7
+                    //
+                    // OUTPUT GPIO(mode 7)  0X07 pulldown, 0x17 pullup, 0x?f no pullup/down
+                    // INPUT GPIO(mode 7)   0X27 pulldown, 0x37 pullup, 0x?f no pullup/down
+
+                    0x090 0x27          // P8_7 = SWITCH_EXT0 = GPIO1_6
+                    0x094 0x27          // P8_8 = SWITCH_EXT1 = GPIO1_7
+                    0x09C 0x27          // P8_9 = SWITCH_EXT2 = GPIO0_2
+                    0x098 0x27          // P8_10 = SWITCH_EXT3 = GPIO0_3
+                    0x040 0x27          // P9_15 = SWITCH_0 = GPIO1_16
+                    0x04C 0x27          // P9_16 = SWITCH_1 = GPIO1_19
+                    0x044 0x27          // P9_23 = SWITCH_2 = GPIO1_17
+                    0x1AC 0x27          // P9_25 = SWITCH_3 = GPIO1_21
+                >;
+            };
+            bb_uart4_pins: pinmux_bb_uart4_pins {
+                pinctrl-single,pins = <
+                    0x070 0x36          // P9_11 = UART4_RXD.uart4_rxd | MODE6
+                >;
+            };
+            bb_uart5_pins: pinmux_bb_uart5_pins {
+                pinctrl-single,pins = <
+                    0x0C0 0x14          // P8_37 = UART5_TXD.uart5_txd | MODE4
+                    0x0C4 0x34          // P8_38 = UART5_RXD.uart5_rxd | MODE4
+                >;
+            };
+            bb_i2c2_pins: pinmux_bb_i2c2_pins {
+                pinctrl-single,pins = <
+                    0x178 0x73          // P9.19 = i2c2_sda | MODE3 INPUT_PULLUP 
+                    0x17c 0x73          // P9.20 = i2c2_scl | MODE3 INPUT_PULLUP
+                >;
+            };
+            bb_spi1_pins: pinmux_spi1_pins {
+                pinctrl-single,pins = <
+                    0x190 0x13          // P9_31 = SPI1_SCLK.spi1_sclk | MODE3 | OUTPUT_PULLUP
+                    0x194 0x33          // P9_29 = SPI1_MISO.spi1_d0 | MODE3 | INPUT_PULLUP
+                    0x198 0x13          // P9_30 = SPI1_MOSI.spi1_d1 | MODE3 | OUTPUT_PULLUP
+                    0x19C 0x13          // P9_28 = SPI1_CS0.spi1_cs0 | MODE3 | OUTPUT_PULLUP
+                    0x164 0x12          // P9_42 = GPIO0_7.spi1_cs1 | MODE2 | OUTPUT_PULLUP
+                >;
+            };
+        };
+    };
+
+    fragment@1 {
+        target = <&uart4>;
+        __overlay__ {
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&bb_uart4_pins>;
+        };
+    };
+
+    fragment@2 {
+        target = <&uart5>;
+        __overlay__ {
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&bb_uart5_pins>;
+        };
+    };
+
+    fragment@3 {
+        target = <&spi1>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&bb_spi1_pins>;
+            cs-gpios = <&gpio1 7 0
+                        &gpio4 17 0>;
+
+            spidev@0 {
+                #address-cells = <1>;
+                #size-cells = <0>;
+                compatible = "linux,spidev";
+                reg = <0>;
+                spi-max-frequency = <16000000>;
+            };
+        };
+    };
+
+
+    fragment@4 {
+        target = <&i2c1>;
+        __overlay__ {
+
+            pinctrl-names = "default";
+            pinctrl-0 = <&bb_i2c2_pins>;
+
+            status = "okay";
+            clock-frequency = <100000>;
+
+            /* shut up DTC warnings */
+            #address-cells = <1>;
+            #size-cells = <0>;
+
+            /* MCP79410 RTC module */
+            rtc@68 {
+                compatible = "maxim,ds1338";
+                reg = <0x68>;
+            };
+        };
+    };
+
+    fragment@5 {
+        target = <&baseboard_beaglebone_black>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <1>;
+
+            gpio_keys {
+                compatible = "gpio-keys";
+                pinctrl-names = "default";
+                pinctrl-0 = <&switch_pins>;
+                #address-cells = <1>;
+                #size-cells = <0>;
+
+                switch_ext0 {
+                    label = "switch_ext0";
+                    debounce_interval = <50>;
+                    linux,code = <112>;
+                    gpios = <&gpio2 2 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_ext1 {
+                    label = "switch_ext1";
+                    debounce_interval = <50>;
+                    linux,code = <113>;
+                    gpios = <&gpio2 3 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_ext2 {
+                    label = "switch_ext2";
+                    debounce_interval = <50>;
+                    linux,code = <114>;
+                    gpios = <&gpio2 5 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_ext3 {
+                    label = "switch_ext3";
+                    debounce_interval = <50>;
+                    linux,code = <115>;
+                    gpios = <&gpio2 4 0x5>;
+                    gpio-key,wakeup;
+                };
+
+                switch_0 {
+                    label = "switch_0";
+                    debounce_interval = <50>;
+                    linux,code = <90>;
+                    gpios = <&gpio3 21 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_1 {
+                    label = "switch_1";
+                    debounce_interval = <50>;
+                    linux,code = <91>;
+                    gpios = <&gpio1 17 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_2 {
+                    label = "switch_2";
+                    debounce_interval = <50>;
+                    linux,code = <92>;
+                    gpios = <&gpio1 16 0x5>;
+                    gpio-key,wakeup;
+                };
+                switch_3 {
+                    label = "switch_3";
+                    debounce_interval = <50>;
+                    linux,code = <94>;
+                    gpios = <&gpio1 19 0x5>;
+                    gpio-key,wakeup;
+                };
+            };
+        };
+    };
+
+    fragment@6 {
+        target = <&tscadc>;
+        __overlay__ {
+            tscadc {
+                status = "okay";
+
+                adc {
+                    ti,adc-channels = <0 1 2>;
+                };
+            };
+        };
+    };
+};
