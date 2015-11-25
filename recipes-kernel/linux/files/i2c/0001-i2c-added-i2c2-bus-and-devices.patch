@@ -1,0 +1,65 @@
+From 05f3345404a362ce3fe02d7dd919538441d584d3 Mon Sep 17 00:00:00 2001
+From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
+Date: Tue, 24 Nov 2015 18:45:38 +0100
+Subject: [PATCH] i2c: added i2c2 bus and devices
+
+---
+ arch/arm/boot/dts/am335x-bone-common.dtsi | 35 +++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+
+diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335x-bone-common.dtsi
+index 7bda8ed..ae1e1ee 100644
+--- a/arch/arm/boot/dts/am335x-bone-common.dtsi
++++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
+@@ -81,6 +81,13 @@
+ 		>;
+ 	};
+ 
++	i2c2_pins: pinmux_i2c2_pins {
++		pinctrl-single,pins = <
++			0x178 (PIN_INPUT_PULLUP | MUX_MODE3)	/* i2c2_sda.i2c2_sda */
++			0x17c (PIN_INPUT_PULLUP | MUX_MODE3)	/* i2c2_scl.i2c2_scl */
++		>;
++	};
++
+ 	uart0_pins: pinmux_uart0_pins {
+ 		pinctrl-single,pins = <
+ 			0x170 (PIN_INPUT_PULLUP | MUX_MODE0)	/* uart0_rxd.uart0_rxd */
+@@ -247,6 +254,34 @@
+ 
+ };
+ 
++&i2c2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&i2c2_pins>;
++
++	status = "okay";
++	clock-frequency = <100000>;
++
++	rtc@68 {
++                compatible = "maxim,ds1307";
++		reg = <0x68>;
++	};
++
++        at24c256 {
++                compatible = "at24,at24c256";
++                reg = <0x54>;
++        };
++
++        /* pca9685 pwm module 0 */
++        pca@7F {
++                compatible = "nxp,pca9685-pwm";
++                #pwm-cells = <2>;
++                reg = <0x7F>;
++                /* invert; */
++                /* open-drain; */
++            };
++};
++
++
+ /include/ "tps65217.dtsi"
+ 
+ &tps {
+-- 
+2.1.4
+

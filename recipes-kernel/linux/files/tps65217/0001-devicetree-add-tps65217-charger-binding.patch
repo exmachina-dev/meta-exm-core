@@ -1,0 +1,26 @@
+The TPS65217 charger is a subnode of the TPS65217 MFD.
+
+Signed-off-by: Enric Balletbo i Serra <enric.balletbo@xxxxxxxxxxxxx>
+---
+.../devicetree/bindings/power_supply/tps65217_charger.txt | 12 ++++++++++++
+1 file changed, 12 insertions(+)
+create mode 100644 Documentation/devicetree/bindings/power_supply/tps65217_charger.txt
+
+diff --git a/Documentation/devicetree/bindings/power_supply/tps65217_charger.txt b/Documentation/devicetree/bindings/power_supply/tps65217_charger.txt
+new file mode 100644
+index 0000000..98d131a
+--- /dev/null
++++ b/Documentation/devicetree/bindings/power_supply/tps65217_charger.txt
+@@ -0,0 +1,12 @@
++TPS65217 Charger
++
++Required Properties:
++-compatible: "ti,tps65217-charger"
++
++This node is a subnode of the tps65217 PMIC.
++
++Example:
++
++ tps65217-charger {
++ compatible = "ti,tps65090-charger";
++ };

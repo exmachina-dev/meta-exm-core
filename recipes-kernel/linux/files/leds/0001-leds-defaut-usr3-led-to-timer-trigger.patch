@@ -1,0 +1,25 @@
+From 3734f723750dbb6a6590597d72ee6f649d06d7a9 Mon Sep 17 00:00:00 2001
+From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
+Date: Tue, 24 Nov 2015 18:00:56 +0100
+Subject: [PATCH] leds: defaut usr3 led to timer trigger
+
+---
+ arch/arm/boot/dts/am335x-bone-common.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335x-bone-common.dtsi
+index 04bf0a3..7bda8ed 100644
+--- a/arch/arm/boot/dts/am335x-bone-common.dtsi
++++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
+@@ -48,7 +48,7 @@
+ 		led@5 {
+ 			label = "beaglebone:green:usr3";
+ 			gpios = <&gpio1 24 GPIO_ACTIVE_HIGH>;
+-			linux,default-trigger = "mmc1";
++			linux,default-trigger = "timer";
+ 			default-state = "off";
+ 		};
+ 	};
+-- 
+2.1.4
+

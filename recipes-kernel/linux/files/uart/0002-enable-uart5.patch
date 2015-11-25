@@ -29,7 +29,7 @@ index 5571e0b..d629164 100644
  	status = "okay";
  };
  
-+&uart6 {                                                       /* really uart5 */
++&uart5 {                                                       /* really uart5 */
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&uart5_pins>;
 +

@@ -1,0 +1,27 @@
+From 6583a0997dd6ed80d1582a9c734e9592218c97c1 Mon Sep 17 00:00:00 2001
+From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
+Date: Tue, 24 Nov 2015 20:39:49 +0100
+Subject: [PATCH] adc: added thermistors pins
+
+---
+ arch/arm/boot/dts/am335x-bone-common.dtsi | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335x-bone-common.dtsi
+index 1112ea1..b2dbc0c 100644
+--- a/arch/arm/boot/dts/am335x-bone-common.dtsi
++++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
+@@ -416,3 +416,10 @@
+ &sham {
+ 	status = "okay";
+ };
++
++&tscadc {
++        status = "okay";
++        adc {
++                ti,adc-channels = <0 1 2>;
++        };
++};
+-- 
+2.1.4
+

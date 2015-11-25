@@ -1,0 +1,31 @@
+From 36d788a3b9577eba934ed5136c522f3eb7bc1d95 Mon Sep 17 00:00:00 2001
+From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
+Date: Tue, 24 Nov 2015 18:05:25 +0100
+Subject: [PATCH] hdmi: Removed hdmi device
+
+---
+ arch/arm/boot/dts/am335x-boneblack.dts | 11 -----------
+ 1 file changed, 11 deletions(-)
+
+diff --git a/arch/arm/boot/dts/am335x-boneblack.dts b/arch/arm/boot/dts/am335x-boneblack.dts
+index 901739f..5bdbdb9 100644
+--- a/arch/arm/boot/dts/am335x-boneblack.dts
++++ b/arch/arm/boot/dts/am335x-boneblack.dts
+@@ -69,14 +69,3 @@
+ &lcdc {
+ 	status = "okay";
+ };
+-
+-/ {
+-	hdmi {
+-		compatible = "ti,tilcdc,slave";
+-		i2c = <&i2c0>;
+-		pinctrl-names = "default", "off";
+-		pinctrl-0 = <&nxp_hdmi_bonelt_pins>;
+-		pinctrl-1 = <&nxp_hdmi_bonelt_off_pins>;
+-		status = "okay";
+-	};
+-};
+-- 
+2.1.4
+
