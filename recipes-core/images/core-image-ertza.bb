@@ -20,10 +20,9 @@ IMAGE_LINGUAS = " "
 
 LICENSE = "MIT"
 
-IMAGE_ROOTFS_SIZE ?= "8192"
-IMAGE_EXTRA_SPACE = "202048"
+IMAGE_ROOTFS_SIZE ?= "2097152"
 
-CORE_IMAGE_EXTRA_INSTALL += "kernel-modules kernel-devicetree"
+CORE_IMAGE_EXTRA_INSTALL += "kernel-modules kernel-devicetree dropbear"
 
 DISTRO_FEATURES_remove = "alsa x11 nfs bluetooth wifi opengl pulseaudio 3g irda tk"
 #MACHINE_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
