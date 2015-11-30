@@ -1,3 +1,9 @@
+```
+_  _ ____ ___ ____    ____ _  _ _  _    ____ ____ ____ ____ 
+|\/| |___  |  |__| __ |___  \/  |\/| __ |    |  | |__/ |___ 
+|  | |___  |  |  |    |___ _/\_ |  |    |___ |__| |  \ |___ 
+ 
+```
 # meta-exm-core
 
 This layer provides recipes and images for building a minimal embedded
