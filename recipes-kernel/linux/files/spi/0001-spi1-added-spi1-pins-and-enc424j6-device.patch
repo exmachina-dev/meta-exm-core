@@ -11,7 +11,7 @@ diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335
 index 600d599..46b6919 100644
 --- a/arch/arm/boot/dts/am335x-bone-common.dtsi
 +++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
-@@ -88,6 +88,15 @@
+@@ -88,6 +88,21 @@
  		>;
  	};
  
@@ -24,10 +24,16 @@ index 600d599..46b6919 100644
 +                >;
 +        };
 +
++        mcp2515_0_pins: pinmux_mpc2515_0_pins {
++                pinctrl-single,pins = <
++                        0x1ac (PIN_INPUT_PULLUP | MUX_MODE7)
++                >;
++        };
++
  	uart0_pins: pinmux_uart0_pins {
  		pinctrl-single,pins = <
  			0x170 (PIN_INPUT_PULLUP | MUX_MODE0)	/* uart0_rxd.uart0_rxd */
-@@ -303,6 +312,23 @@
+@@ -303,6 +312,35 @@
              };
  };
  
@@ -44,7 +50,19 @@ index 600d599..46b6919 100644
 +                #size-cells = <0>;
 +                compatible = "microchip,mcp2515";
 +                reg = <0>;
++                mode = <0>;
 +                spi-max-frequency = <16000000>;
++
++                pinctrl-names = "default";
++                pinctrl-0 = <&mcp2515_0_pins>;
++
++                interrupt-parent = <&gpio3>;
++                interrupts = <19>;
++
++                mcp251x,oscillator-frequency = <16000000>;
++                mcp251x,irq-gpios = <&gpio3 19 0>;
++                mcp251x,stay-awake = <1>;
++                mcp251x,enable-clkout = <1>;
 +        };
 +};
 +

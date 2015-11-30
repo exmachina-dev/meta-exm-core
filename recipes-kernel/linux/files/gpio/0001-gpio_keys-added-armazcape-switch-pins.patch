@@ -45,7 +45,7 @@ index ae1e1ee..600d599 100644
  	status = "okay";
  };
 +
-+&ocp {
++/ {
 +        #address-cells = <1>;
 +        #size-cells = <1>;
 +
@@ -84,10 +84,10 @@ index ae1e1ee..600d599 100644
 +                        gpios = <&gpio2 4 0x5>;
 +                        gpio-key,wakeup;
 +                };
-+                switch_ext3 {
++                switch_ext4 {
 +                        label = "switch_ext4";
 +                        debounce_interval = <50>;
-+                        linux,code = <115>;
++                        linux,code = <116>;
 +                        gpios = <&gpio1 29 0x5>;
 +                        gpio-key,wakeup;
 +                };
@@ -116,7 +116,7 @@ index ae1e1ee..600d599 100644
 +                switch_3 {
 +                        label = "switch_3";
 +                        debounce_interval = <50>;
-+                        linux,code = <94>;
++                        linux,code = <93>;
 +                        gpios = <&gpio1 19 0x5>;
 +                        gpio-key,wakeup;
 +                };
