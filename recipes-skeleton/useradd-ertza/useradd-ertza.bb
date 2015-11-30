@@ -43,6 +43,8 @@ do_install () {
         chown -R ${_USER} ${D}${_HOMEDIR}
 
         chgrp -R ${_GROUP} ${D}${_HOMEDIR}
+
+        install -d -o ${_USER} -g ${_USER} -p -m 755 ${D}/home/data/
 }
 
 FILES_${PN} = "\
@@ -50,6 +52,7 @@ FILES_${PN} = "\
     ${_HOMEDIR}/.ertza \
     ${_HOMEDIR}/.ssh/authorized_keys \
     ${_ROOTDIR}/.ssh/authorized_keys \
+    /home/data \
 "
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"

@@ -12,12 +12,17 @@ SRC_URI += " \
     file://hosts \
 "
 
+PROVIDES += "base-files-armaz"
+
+DEPENDS_${PN}-armaz = "\
+    useradd-ertza \
+"
+
 RDEPENDS_${PN}-armaz = "\
     useradd-ertza \
 "
 
 do_install_append() {
-    install -d -o ertza -g ertza -p -m 755 ${D}/home/data/
     install -m 0644 ${WORKDIR}/hostname ${D}${sysconfdir}
     install -m 0644 ${WORKDIR}/fstab ${D}${sysconfdir}
     install -m 0644 ${WORKDIR}/hosts ${D}${sysconfdir}
@@ -27,5 +32,4 @@ FILES_${PN}-armaz = " \
     ${sysconfdir}/hostname \
     ${sysconfdir}/fstab \
     ${sysconfdir}/hosts \
-    /home/data \
 "
