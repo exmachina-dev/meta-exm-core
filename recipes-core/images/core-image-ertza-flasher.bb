@@ -1,19 +1,15 @@
 require recipes-core/images/core-image-minimal.bb
 
-SUMMARY = "A console-only image that fully supports the target device \
-hardware."
+SUMMARY = "A flasher image to burn latest emmc-image."
 
 LICENSE = "MIT"
 
 IMAGE_INSTALL += "\
     useradd-ertza \
-    ertza \
     opkg \
-    opkg-config \
+    emmc-flasher \
 "
 ###     ertza
-
-#IMAGE_INSTALL_remove = " packagegroup-base-extended psplash-default"
 
 IMAGE_FEATURES_append = " package-management"
 
@@ -28,12 +24,7 @@ CORE_IMAGE_EXTRA_INSTALL += "kernel-modules kernel-devicetree dropbear"
 DISTRO_FEATURES_remove = "alsa x11 nfs bluetooth wifi opengl pulseaudio 3g irda tk"
 #MACHINE_FEATURES_remove = "alsa x11 nfs nfc bluetooth wifi opengl wayland pulseaudio 3g irda"
 
-#DISTRO_FEATURES_append = " serial usbnet"
-DISTRO_FEATURES_append = "tsp65217"
-
 CONMANPKGS_remove = "connman-plugin-wifi"
-
-IPK_FEED_URIS = "http://pkg.exmachina.fr/beaglebone"
 
 ROOTFS_POSTPROCESS_COMMAND += "set_root_passwd;"
 
@@ -50,4 +41,4 @@ set_root_passwd() {
     mv ${IMAGE_ROOTFS}/etc/passwd.new ${IMAGE_ROOTFS}/etc/passwd ;
 }
 
-export IMAGE_BASENAME = "core-image-ertza"
+export IMAGE_BASENAME = "core-image-ertza-flasher"

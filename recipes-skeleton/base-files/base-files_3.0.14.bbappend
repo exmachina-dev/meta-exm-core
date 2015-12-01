@@ -9,27 +9,24 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 SRC_URI += " \
     file://hostname \
     file://fstab \
-    file://hosts \
 "
 
-PROVIDES += "base-files-armaz"
+PROVIDES += "base-files-elias"
 
-DEPENDS_${PN}-armaz = "\
+DEPENDS_${PN}-elias = "\
     useradd-ertza \
 "
 
-RDEPENDS_${PN}-armaz = "\
+RDEPENDS_${PN}-elias = "\
     useradd-ertza \
 "
 
 do_install_append() {
     install -m 0644 ${WORKDIR}/hostname ${D}${sysconfdir}
     install -m 0644 ${WORKDIR}/fstab ${D}${sysconfdir}
-    install -m 0644 ${WORKDIR}/hosts ${D}${sysconfdir}
 }
 
-FILES_${PN}-armaz = " \
+FILES_${PN}-elias = " \
     ${sysconfdir}/hostname \
     ${sysconfdir}/fstab \
-    ${sysconfdir}/hosts \
 "
