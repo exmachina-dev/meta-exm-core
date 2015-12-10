@@ -7,7 +7,7 @@ SECTION = "libs"
 LICENSE = "none"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-SRCREV = "d620ac61847556d067636cd6f127b1de7033b3c1"
+SRCREV = "fb81d765c16dba989b8f436ac0ab3122ed04d030"
 
 PR = "r1"
 PV = "0.0.1+git${SRCPV}"
@@ -85,12 +85,11 @@ FILES_${PN} = "\
     ${systemd_unitdir}/system/ertza.service \
     ${sysconfdir}/systemd/network/10-eth0.network \
     ${bindir}/ertza \
-    ${bindir}/modbus_rw \
-    ${bindir}/pedale \
     ${PYTHON_SITEPACKAGES_DIR}/ertza* \
     ${PYTHON_SITEPACKAGES_DIR}/Ertza* \
 "
 
 CONFFILES_${PN} ="\
     ${sysconfdir}/ertza/default.conf \
+    ${sysconfdir}/ertza/machine.conf \
 "
