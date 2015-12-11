@@ -1,0 +1,35 @@
+From 05f3345404a362ce3fe02d7dd919538441d584d3 Mon Sep 17 00:00:00 2001
+From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
+Date: Tue, 24 Nov 2015 18:45:38 +0100
+Subject: [PATCH] i2c: added i2c2 bus and devices
+
+---
+ arch/arm/boot/dts/am335x-bone-common.dtsi | 35 +++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+
+diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335x-bone-common.dtsi
+index 7bda8ed..ae1e1ee 100644
+--- a/arch/arm/boot/dts/am335x-bone-common.dtsi
++++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
+@@ -247,10 +254,18 @@
+ 
+ 	rtc@68 {
+                 compatible = "maxim,ds1307";
+ 		reg = <0x68>;
+ 	};
++
++        pca@7F {
++                compatible = "nxp,pca9685-pwm";
++                #pwm-cells = <2>;
++                reg = <0x7F>;
++                /* invert; */
++                /* open-drain; */
++            };
+ };
+ 
+ 
+ /include/ "tps65217.dtsi"
+ 
+-- 
+2.1.4
+

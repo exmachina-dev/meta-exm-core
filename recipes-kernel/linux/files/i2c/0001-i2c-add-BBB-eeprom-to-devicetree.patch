@@ -1,0 +1,28 @@
+From eb6431e22c74d55a224a475cab6d6d6b9bb035b0 Mon Sep 17 00:00:00 2001
+From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
+Date: Fri, 11 Dec 2015 16:50:30 +0100
+Subject: [PATCH] add BBB eeprom to devicetree
+
+---
+ arch/arm/boot/dts/am335x-bone-common.dtsi | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335x-bone-common.dtsi
+index 7e124ab..a9832f5 100644
+--- a/arch/arm/boot/dts/am335x-bone-common.dtsi
++++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
+@@ -289,6 +289,11 @@
+ 		reg = <0x24>;
+ 	};
+ 
++        eeprom@50 {
++                compatible = "at,24c256";
++                reg = <0x50>;
++        };
++
+ };
+ 
+ &i2c2 {
+-- 
+2.1.4
+

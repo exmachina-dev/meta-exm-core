@@ -21,7 +21,11 @@ SRC_URI += " \
     file://uart/0002-enable-uart5.patch \
     file://hdmi/0001-hdmi-Removed-hdmi-device.patch \
     file://gpio/0001-gpio_keys-added-armazcape-switch-pins.patch \
-    file://i2c/0001-i2c-added-i2c2-bus-and-devices.patch \
+    file://i2c/0001-i2c-add-BBB-eeprom-to-devicetree.patch \
+    file://i2c/0001-i2c-add-i2c2-bus.patch \
+    file://i2c/0002-i2c-add-ArmazCape-eeprom-to-devicetree.patch \
+    file://i2c/0003-i2c-add-rtc-to-devicetree.patch \
+    file://i2c/0004-i2c-add-pwm-module-to-devicetree.patch \
     file://leds/0001-leds-defaut-usr3-led-to-timer-trigger.patch \
     file://spi/0001-spi1-added-spi1-pins-and-enc424j6-device.patch \
     file://adc/0001-adc-added-thermistors-pins.patch \

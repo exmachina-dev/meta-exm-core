@@ -25,7 +25,7 @@ index 7bda8ed..ae1e1ee 100644
  	uart0_pins: pinmux_uart0_pins {
  		pinctrl-single,pins = <
  			0x170 (PIN_INPUT_PULLUP | MUX_MODE0)	/* uart0_rxd.uart0_rxd */
-@@ -247,6 +254,34 @@
+@@ -247,6 +254,15 @@
  
  };
  
@@ -35,25 +35,6 @@ index 7bda8ed..ae1e1ee 100644
 +
 +	status = "okay";
 +	clock-frequency = <100000>;
-+
-+	rtc@68 {
-+                compatible = "maxim,ds1307";
-+		reg = <0x68>;
-+	};
-+
-+        at24c256 {
-+                compatible = "at24,at24c256";
-+                reg = <0x54>;
-+        };
-+
-+        /* pca9685 pwm module 0 */
-+        pca@7F {
-+                compatible = "nxp,pca9685-pwm";
-+                #pwm-cells = <2>;
-+                reg = <0x7F>;
-+                /* invert; */
-+                /* open-drain; */
-+            };
 +};
 +
 +
