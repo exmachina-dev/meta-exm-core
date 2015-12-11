@@ -1,10 +1,14 @@
+From: Enric Balletbo i Serra <eballetbo@gmail.com>
+Date: 24/09/2015 21:44
+Subject: [PATCHv3 1/2] devicetree: Add TPS65217 charger binding.
+
 The TPS65217 charger is a subnode of the TPS65217 MFD.
 
-Signed-off-by: Enric Balletbo i Serra <enric.balletbo@xxxxxxxxxxxxx>
+Signed-off-by: Enric Balletbo i Serra <enric.balletbo@collabora.com>
 ---
-.../devicetree/bindings/power_supply/tps65217_charger.txt | 12 ++++++++++++
-1 file changed, 12 insertions(+)
-create mode 100644 Documentation/devicetree/bindings/power_supply/tps65217_charger.txt
+ .../devicetree/bindings/power_supply/tps65217_charger.txt    | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/power_supply/tps65217_charger.txt
 
 diff --git a/Documentation/devicetree/bindings/power_supply/tps65217_charger.txt b/Documentation/devicetree/bindings/power_supply/tps65217_charger.txt
 new file mode 100644
@@ -21,6 +25,8 @@ index 0000000..98d131a
 +
 +Example:
 +
-+ tps65217-charger {
-+ compatible = "ti,tps65090-charger";
-+ };
++	tps65217-charger {
++		compatible = "ti,tps65090-charger";
++	};
+-- 2.1.0
+

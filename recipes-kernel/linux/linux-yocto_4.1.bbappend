@@ -25,5 +25,8 @@ SRC_URI += " \
     file://leds/0001-leds-defaut-usr3-led-to-timer-trigger.patch \
     file://spi/0001-spi1-added-spi1-pins-and-enc424j6-device.patch \
     file://adc/0001-adc-added-thermistors-pins.patch \
-    file://tps65217/0008-tps65217-Enable-KEY_POWER-press-on-AC-loss-PWR_BUT.patch \
+    file://tps65217/0001-devicetree-Add-TPS65217-charger-binding.patch \
+    file://tps65217/0001-power_supply-Add-support-for-tps65217-charger.patch \
+    file://tps65217/0001-tps65217-Enable-KEY_POWER-press-on-AC-loss-PWR_BUT.patch \
+    file://tps65217/0001-add-tps65217-charger-to-device-tree.patch \
 "

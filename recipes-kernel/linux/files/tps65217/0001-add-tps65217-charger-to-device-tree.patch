@@ -1,0 +1,27 @@
+From 24e30cbfbb2ca6c285e1f60e3b6bdad7611561af Mon Sep 17 00:00:00 2001
+From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
+Date: Thu, 10 Dec 2015 17:10:58 +0100
+Subject: [PATCH] add tps65217-charger to device-tree
+
+---
+ arch/arm/boot/dts/am335x-bone-common.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335x-bone-common.dtsi
+index bb8d012..30ffdf3 100644
+--- a/arch/arm/boot/dts/am335x-bone-common.dtsi
++++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
+@@ -420,6 +420,10 @@
+ 			regulator-always-on;
+ 		};
+ 	};
++        
++        charger {
++                compatible = "ti,tps65217-charger";
++        };
+ };
+ 
+ &cpsw_emac0 {
+-- 
+2.1.4
+
