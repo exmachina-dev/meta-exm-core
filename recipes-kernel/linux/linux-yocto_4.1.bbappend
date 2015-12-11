@@ -16,6 +16,8 @@ SRC_URI += " \
     file://tty.cfg \
     file://pwm.cfg \
     file://leds.cfg \
+    file://usbnet.cfg \
+    file://tps65217.cfg \
 \
     file://uart/0001-enable-uart4.patch \
     file://uart/0002-enable-uart5.patch \
