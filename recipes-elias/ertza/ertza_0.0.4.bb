@@ -7,7 +7,7 @@ SECTION = "libs"
 LICENSE = "none"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-SRCREV = "fb81d765c16dba989b8f436ac0ab3122ed04d030"
+SRCREV = "f1738b61d6aba24fb43a76cdd5ba60fbf9c7a9a8"
 
 PR = "r1"
 PV = "0.0.1+git${SRCPV}"
