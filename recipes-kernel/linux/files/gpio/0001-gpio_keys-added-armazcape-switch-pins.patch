@@ -31,10 +31,10 @@ index ae1e1ee..600d599 100644
 +                        0x09C (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P8_9 = SWITCH_EXT2 = GPIO2_5
 +                        0x098 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P8_10 = SWITCH_EXT3 = GPIO2_4
 +                        0x07c (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P8_26 = SWITCH_EXT4 = GPIO1_29
-+                        0x040 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P9_15 = SWITCH_0 = GPIO1_16
-+                        0x04C (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P9_16 = SWITCH_1 = GPIO1_19
-+                        0x044 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P9_23 = SWITCH_2 = GPIO1_17
-+                        0x1AC (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P9_25 = SWITCH_3 = GPIO1_21
++                        0x040 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P9_15 = SWITCH_2 = GPIO1_16
++                        0x04C (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P9_16 = SWITCH_3 = GPIO1_19
++                        0x044 (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P9_23 = SWITCH_1 = GPIO1_17
++                        0x1AC (SLEWCTRL_SLOW | PIN_INPUT_PULLUP | MUX_MODE7)          // P9_25 = SWITCH_0 = GPIO1_21
 +                 >;
 +         };
  };
