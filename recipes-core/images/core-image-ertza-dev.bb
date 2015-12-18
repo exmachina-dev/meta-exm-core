@@ -9,6 +9,7 @@ IMAGE_INSTALL += "\
     python3-pip \
     gcc \
     util-linux \
+    htop \
 "
 
 export IMAGE_BASENAME = "core-image-ertza-dev"
