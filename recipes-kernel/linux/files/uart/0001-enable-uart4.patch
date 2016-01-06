@@ -17,7 +17,7 @@ index 2e7d932..5571e0b 100644
  
 +        uart4_pins: pinmux_uart4_pins {
 +		pinctrl-single,pins = <
-+			0x150 (PIN_INPUT_PULLUP | MUX_MODE6)	/* uart4_rxd.uart4_rxd */
++			0x150 (PIN_INPUT_PULLDOWN | MUX_MODE6)	/* uart4_rxd.uart4_rxd */
 +		>;
 +        };
 +
