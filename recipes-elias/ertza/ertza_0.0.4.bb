@@ -42,7 +42,7 @@ inherit setuptools3 systemd
 
 SYSTEMD_SERVICE_${PN} = "ertza.service"
 
-BINCOMMANDS = "ertza"
+BINCOMMANDS = "ertza eeprom_writer.py"
 
 # need to export these variables for python-config to work
 export BUILD_SYS
@@ -57,6 +57,7 @@ do_install_append() {
             ${D}${bindir} \
 
     install -m 0755 ${S}/bin/ertza ${D}${bindir}/
+    install -m 0755 ${S}/tools/eeprom_writer.py ${D}${bindir}/
 
     install -m 0755 ${S}/conf/default.conf ${D}${sysconfdir}/ertza/default.conf
     install -m 0755 ${S}/conf/machine.conf ${D}${sysconfdir}/ertza/machine.conf
@@ -85,6 +86,7 @@ FILES_${PN} = "\
     ${systemd_unitdir}/system/ertza.service \
     ${sysconfdir}/systemd/network/10-eth0.network \
     ${bindir}/ertza \
+    ${bindir}/eeprom_writer.py \
     ${PYTHON_SITEPACKAGES_DIR}/ertza* \
     ${PYTHON_SITEPACKAGES_DIR}/Ertza* \
 "
