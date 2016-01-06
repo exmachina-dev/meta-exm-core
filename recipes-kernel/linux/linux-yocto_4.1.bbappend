@@ -29,7 +29,8 @@ SRC_URI += " \
     file://i2c/0003-i2c-add-rtc-to-devicetree.patch \
     file://i2c/0004-i2c-add-pwm-module-to-devicetree.patch \
     file://leds/0001-leds-defaut-usr3-led-to-timer-trigger.patch \
-    file://spi/0001-spi1-added-spi1-pins-and-enc424j6-device.patch \
+    file://spi/0001-spi1-added-spi1-pins.patch \
+    file://spi/0002-added-ks8851-pins-in-devicetree.patch \
     file://adc/0001-adc-added-thermistors-pins.patch \
     file://tps65217/0001-devicetree-Add-TPS65217-charger-binding.patch \
     file://tps65217/0001-power_supply-Add-support-for-tps65217-charger.patch \

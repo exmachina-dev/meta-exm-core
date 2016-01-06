@@ -1,0 +1,51 @@
+From 8f094b715a4e6731cf12506a552007bb43a03283 Mon Sep 17 00:00:00 2001
+From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
+Date: Tue, 24 Nov 2015 19:29:22 +0100
+Subject: [PATCH] spi1: added spi1 pins and enc424j6 device
+
+---
+ arch/arm/boot/dts/am335x-bone-common.dtsi | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335x-bone-common.dtsi
+index 600d599..46b6919 100644
+--- a/arch/arm/boot/dts/am335x-bone-common.dtsi
++++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
+@@ -88,6 +88,15 @@
+ 		>;
+ 	};
+ 
++        spi1_pins: pinmux_spi1_pins {
++                pinctrl-single,pins = <
++                        0x190 (PIN_INPUT_PULLUP | MUX_MODE3)
++                        0x194 (PIN_INPUT_PULLUP | MUX_MODE3)
++                        0x198 (PIN_OUTPUT_PULLUP | MUX_MODE3)
++                        0x19c (PIN_OUTPUT_PULLUP | MUX_MODE3)
++                >;
++        };
++
+ 	uart0_pins: pinmux_uart0_pins {
+ 		pinctrl-single,pins = <
+ 			0x170 (PIN_INPUT_PULLUP | MUX_MODE0)	/* uart0_rxd.uart0_rxd */
+@@ -303,6 +312,18 @@
+             };
+ };
+ 
++&spi1 {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        status = "okay";
++        pinctrl-names = "default";
++        pinctrl-0 = <&spi1_pins>;
++        ti,pio-mode;
++
++        cs-gpios = <&gpio3 17 0>;
++};
++
+ 
+ /include/ "tps65217.dtsi"
+ 
+-- 
+2.1.4
+
