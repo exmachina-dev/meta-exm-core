@@ -40,7 +40,7 @@ index ae1e1ee..600d599 100644
  };
  
  &uart0 {
-@@ -390,3 +412,74 @@
+@@ -390,3 +412,81 @@
  &sham {
  	status = "okay";
  };
@@ -111,6 +111,13 @@ index ae1e1ee..600d599 100644
 +                        debounce_interval = <50>;
 +                        linux,code = <92>;
 +                        gpios = <&gpio1 16 0x5>;
++                        gpio-key,wakeup;
++                };
++                switch_3 {
++                        label = "switch_3";
++                        debounce_interval = <50>;
++                        linux,code = <93>;
++                        gpios = <&gpio1 19 0x5>;
 +                        gpio-key,wakeup;
 +                };
 +        };
