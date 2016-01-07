@@ -11,12 +11,13 @@ diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335
 index a2e4d77..6d6de6c 100644
 --- a/arch/arm/boot/dts/am335x-bone-common.dtsi
 +++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
-@@ -97,6 +97,12 @@
+@@ -97,6 +97,13 @@
                  >;
          };
  
 +        ks8851_pins: pinmux_ks8851_pins {
 +                pinctrl-single,pins = <
++                        0x078 (PIN_OUTPUT_PULLUP | MUX_MODE7)
 +                        0x1ac (PIN_INPUT | MUX_MODE7)
 +                >;
 +        };
@@ -24,7 +25,7 @@ index a2e4d77..6d6de6c 100644
  	uart0_pins: pinmux_uart0_pins {
  		pinctrl-single,pins = <
  			0x170 (PIN_INPUT_PULLUP | MUX_MODE0)	/* uart0_rxd.uart0_rxd */
-@@ -323,6 +329,20 @@
+@@ -323,6 +329,21 @@
          pinctrl-names = "default";
          pinctrl-0 = <&spi1_pins>;
          cs-gpios = <&gpio3 17 0>;
@@ -39,6 +40,7 @@ index a2e4d77..6d6de6c 100644
 +                pinctrl-0 = <&ks8851_pins>;
 +
 +                interrupts = <&gpio3 19 GPIO_ACTIVE_LOW>;
++                reset-gpios = <&gpio1 28 GPIO_ACTIVE_LOW>;
 +
 +                spi-max-frequency = <40000000>;
 +        };
