@@ -7,8 +7,8 @@ fi
 
 PLATFORM="beaglebone"
 SRC="http://pkg.exmachina.fr/pkgs/images/${PLATFORM}/auto-update"
-IMG="@TARGET_IMG@-latest.img"
-MD5="@TARGET_IMG@-latest.md5sum"
+IMG="emmc-image-ertza-latest.img"
+MD5="emmc-image-ertza-latest.md5sum"
 
 TARGET_MMC="/dev/mmcblk1"
 
@@ -25,18 +25,19 @@ if [[ "x$confirm" != "xy" ]]; then
     exit 2
 fi
 
-IMG_PARTS=$(fdisk -l -o Start,Size,Id $IMG | tail -n2)
-BOOT_SECT=$(echo $IMG_PARTS | cut -d" " -d1-3 | sed 's/ /,/g')
+BOOT_SECT=$(fdisk -l -o Start,Size,Id $IMG | sed '1,8d' | head -n1 | sed 's/^[ \t]*//' | sed 's/ \+/,/g')
+ROOT_SECT=$(fdisk -l -o Start,Size,Id $IMG | sed '1,8d' | tail -n1 | sed 's/^[ \t]*//' | sed 's/ \+/,/g')
+echo $BOOT_SECT
 
 sfdisk $TARGET_MMC << EOF
-$BOOT_SECT,*
+$(echo $BOOT_SECT | cut -d, -f1),100M,$(echo $BOOT_SECT | cut -d, -f3),*
 ,,,-
 EOF
 
 sync
 
-BOOT_PART="${TARGET_EMMC}p0"
-ROOT_PART="${TARGET_EMMC}p1"
+BOOT_PART="${TARGET_MMC}p1"
+ROOT_PART="${TARGET_MMC}p2"
 
 mkfs.fat "${BOOT_PART}"
 mkfs.ext4 "${ROOT_PART}"
@@ -44,7 +45,7 @@ mkfs.ext4 "${ROOT_PART}"
 sync
 
 echo "Writing $IMG to $TARGET_MMC…"
-dd if="./$IMG" skip=$(echo $BOOT_SECT | cut -d, -f1) of=$BOOT_PART bs=512 count=$(echo $BOOT_SECT | cut -d, -f2)
+dd if="./$IMG" skip=$(echo $BOOT_SECT | cut -d, -f1) of=$BOOT_PART bs=512 count=$(echo $BOOT_SECT | cut -d, -f2 | sed 's/M/K/')
 dd if="./$IMG" skip=$(echo $ROOT_SECT | cut -d, -f1) of=$ROOT_PART bs=512
 echo "Writing $IMG to $TARGET_MMC… Done." || exit 3
 
