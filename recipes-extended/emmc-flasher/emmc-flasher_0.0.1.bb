@@ -12,7 +12,11 @@ SRC_URI = "\
     file://emmc-flasher.sh \
 "
 
-RDEPENDS_${PN} = "bash"
+RDEPENDS_${PN} = " \
+    bash \
+    dosfstools \
+    e2fsprogs \
+"
 
 TARGET_IMG = "emmc-image-ertza"
 
