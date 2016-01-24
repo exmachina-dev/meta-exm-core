@@ -25,7 +25,7 @@ index a2e4d77..6d6de6c 100644
  	uart0_pins: pinmux_uart0_pins {
  		pinctrl-single,pins = <
  			0x170 (PIN_INPUT_PULLUP | MUX_MODE0)	/* uart0_rxd.uart0_rxd */
-@@ -323,6 +329,21 @@
+@@ -323,6 +329,24 @@
          pinctrl-names = "default";
          pinctrl-0 = <&spi1_pins>;
          cs-gpios = <&gpio3 17 0>;
@@ -33,13 +33,16 @@ index a2e4d77..6d6de6c 100644
 +        ks8851@0 {
 +                #address-cells = <1>;
 +                #size-cells = <0>;
++                #interrupts-cells = <2>;
 +                compatible = "micrel,ks8851";
 +                reg = <0>;
++                status ="okay";
 +
 +                pinctrl-names = "default";
 +                pinctrl-0 = <&ks8851_pins>;
 +
-+                interrupts = <&gpio3 19 GPIO_ACTIVE_LOW>;
++                interrupt-parent = <&gpio3>;
++                interrupts = <19 0x8>;
 +                reset-gpios = <&gpio1 28 GPIO_ACTIVE_LOW>;
 +
 +                spi-max-frequency = <40000000>;
