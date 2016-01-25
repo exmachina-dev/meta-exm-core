@@ -31,7 +31,7 @@ RDEPENDS_${PN} = "\
 "
 
 SRC_URI = "\
-    git:///home/willykaze/repos/ertza;protocol=file;branch=dev \
+    git://github.com/exmachina-dev/ertza.git;protocol=https;branch=dev \
     file://ertza.service \
     file://10-eth0.network \
 "
