@@ -12,4 +12,6 @@ IMAGE_INSTALL += "\
     htop \
 "
 
+IMAGE_FEATURES_remove = "read-only-rootfs"
+
 export IMAGE_BASENAME = "core-image-ertza-dev"

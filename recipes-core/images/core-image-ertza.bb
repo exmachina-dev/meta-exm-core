@@ -10,12 +10,13 @@ IMAGE_INSTALL += "\
     ertza \
     opkg \
     opkg-config \
+    ntp \
 "
 ###     ertza
 
 #IMAGE_INSTALL_remove = " packagegroup-base-extended psplash-default"
 
-IMAGE_FEATURES_append = " package-management"
+IMAGE_FEATURES_append = " package-management read-only-rootfs"
 
 IMAGE_LINGUAS = " "
 
