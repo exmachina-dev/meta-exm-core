@@ -1,11 +1,10 @@
 [Unit]
 Description=Ertza server
-After=armaz-dto.service
 
 [Service]
 User=root
 Group=root
-ExecStart=/usr/bin/pedale --disable-rf
+ExecStart=/usr/bin/ertza
 KillMode=process
 
 [Install]

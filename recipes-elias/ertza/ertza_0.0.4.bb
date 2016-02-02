@@ -35,16 +35,21 @@ RDEPENDS_${PN} = "\
 SRC_URI = "\
     git:///home/willykaze/repos/ertza;protocol=file;branch=${BRANCH} \
     file://ertza.service \
+    file://init \
     file://10-eth0.network \
 "
 
 S = "${WORKDIR}/git"
 
-inherit setuptools3 systemd
+inherit setuptools3 systemd update-rc.d
+
+INITSCRIPT_NAME = "ertza"
+INITSCRIPT_PARAMS = "defaults 10"
+
 
 SYSTEMD_SERVICE_${PN} = "ertza.service"
 
-BINCOMMANDS = "ertza eeprom_writer.py"
+BINCOMMANDS = "ertza ertzad eeprom_writer.py"
 
 # need to export these variables for python-config to work
 export BUILD_SYS
@@ -59,6 +64,7 @@ do_install_append() {
             ${D}${bindir} \
 
     install -m 0755 ${S}/bin/ertza ${D}${bindir}/
+    install -m 0755 ${S}/bin/ertzad ${D}${bindir}/
     install -m 0755 ${S}/tools/eeprom_writer.py ${D}${bindir}/
 
     install -m 0755 ${S}/conf/default.conf ${D}${sysconfdir}/ertza/default.conf
@@ -71,6 +77,9 @@ do_install_append() {
     # deal with systemd unit files
     install -d ${D}${systemd_unitdir}/system
     install -d ${D}${sysconfdir}/systemd/network
+
+    install -d ${D}${sysconfdir}/init.d
+    install -m 744 ${WORKDIR}/init ${D}${sysconfdir}/init.d/ertza
 
     sed -e 's,/etc,${sysconfdir},g' \
             -e 's,/usr/sbin,${sbindir},g' \
@@ -87,7 +96,9 @@ FILES_${PN} = "\
     ${sysconfdir}/ertza/* \
     ${systemd_unitdir}/system/ertza.service \
     ${sysconfdir}/systemd/network/10-eth0.network \
+    ${sysconfdir}/init.d/ertza \
     ${bindir}/ertza \
+    ${bindir}/ertzad \
     ${bindir}/eeprom_writer.py \
     ${PYTHON_SITEPACKAGES_DIR}/ertza* \
     ${PYTHON_SITEPACKAGES_DIR}/Ertza* \
