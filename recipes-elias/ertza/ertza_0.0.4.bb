@@ -4,13 +4,14 @@ for Armaz."
 HOMEPAGE = "http://www.exmachina.fr/"
 SECTION = "libs"
 
-LICENSE = "none"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d41d8cd98f00b204e9800998ecf8427e"
+LICENSE = "GPLv3+"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "cad4e5063a3a9a5f3edc8e59ae82ebc22ca00714"
+SRCREV = "e9ae5a35e9f900f5b9eb3e4eea32f33747fd7287"
 
 PR = "r1"
 PV = "0.0.1+git${SRCPV}"
+BRANCH = "dev"
 
 RDEPENDS_${PN} = "\
     libgcc \
@@ -32,7 +33,7 @@ RDEPENDS_${PN} = "\
 "
 
 SRC_URI = "\
-    git://github.com/exmachina-dev/ertza.git;protocol=https;branch=dev \
+    git:///home/willykaze/repos/ertza;protocol=file;branch=${BRANCH} \
     file://ertza.service \
     file://10-eth0.network \
 "
