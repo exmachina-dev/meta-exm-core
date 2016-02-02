@@ -28,6 +28,7 @@ RDEPENDS_${PN} = "\
     python3-smbus \
     python3-subprocess \
     python3-threading \
+    python3-daemon \
 "
 
 SRC_URI = "\
