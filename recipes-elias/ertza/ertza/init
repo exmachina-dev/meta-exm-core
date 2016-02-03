@@ -21,21 +21,20 @@ case "$1" in
   start)
 	echo -n "Starting $DESC: "
         start-stop-daemon -S -p $PIDFILE \
-           -x "$DAEMON" -- $ERTZA_ARGS
+           -x "$DAEMON" -- -p $PIDFILE $ERTZA_ARGS start
 	echo "$NAME."
 	;;
   stop)
 	echo -n "Stopping $DESC: "
-        start-stop-daemon -K -p $PIDFILE -x "$DAEMON"
+        start-stop-daemon -K -p $PIDFILE -x "$DAEMON" -- -p $PIDFILE stop
+        sleep 5
         killall -SIGTERM python3
 	echo "$NAME."
 	;;
   restart|force-reload)
 	echo -n "Restarting $DESC: "
-        start-stop-daemon -K -p $PIDFILE -x "$DAEMON"
-	sleep 5
         start-stop-daemon -S -p $PIDFILE \
-           -x "$DAEMON" -- $ERTZA_ARGS
+           -x "$DAEMON" -- -p $PIDFILE $ERTZA_ARGS restart
 	echo "$NAME."
 	;;
   *)
