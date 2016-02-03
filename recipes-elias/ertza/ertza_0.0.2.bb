@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 SRCREV = "1634cbf41193abf88919896ede0bd863fe089a17"
 
 PR = "r1"
-PV = "0.0.1+git${SRCPV}"
+PV = "${PV}+git${SRCPV}"
 BRANCH = "dev"
 
 RDEPENDS_${PN} = "\
