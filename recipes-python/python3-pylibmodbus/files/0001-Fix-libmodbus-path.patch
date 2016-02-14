@@ -1,0 +1,25 @@
+From de715339d0e6a7be829bde2b72d19b1ac2c2538d Mon Sep 17 00:00:00 2001
+From: Benoit Rapidel <benoit.rapidel@exmachina.fr>
+Date: Sat, 13 Feb 2016 13:02:42 +0100
+Subject: [PATCH] Fix libmodbus path
+
+---
+ pylibmodbus/modbus_core.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pylibmodbus/modbus_core.py b/pylibmodbus/modbus_core.py
+index 0fd9bc8..79ed2c4 100644
+--- a/pylibmodbus/modbus_core.py
++++ b/pylibmodbus/modbus_core.py
+@@ -8,7 +8,7 @@ import ctypes
+ import struct
+ 
+ __libs = ('/usr/local/lib/libmodbus.so',
+-          '/usr/lib/libmodbus.so',
++          '/usr/lib/libmodbus.so.5',
+           '/usr/lib/arm-linux-gnueabihf/libmodbus.so.5')
+ 
+ for lib in __libs:
+-- 
+2.1.4
+
