@@ -48,6 +48,10 @@ INITSCRIPT_PARAMS = "defaults 10"
 
 SYSTEMD_SERVICE_${PN} = "ertza.service"
 
+PROVIDES += "${PN}-eeprom"
+
+PACKAGES += "${PN}-eeprom"
+
 BINCOMMANDS = "ertza ertzad eeprom_writer.py"
 
 # need to export these variables for python-config to work
@@ -98,9 +102,11 @@ FILES_${PN} = "\
     ${sysconfdir}/init.d/ertza \
     ${bindir}/ertza \
     ${bindir}/ertzad \
-    ${bindir}/eeprom_writer.py \
     ${PYTHON_SITEPACKAGES_DIR}/ertza* \
     ${PYTHON_SITEPACKAGES_DIR}/Ertza* \
+"
+FILES_${PN}-eeprom = " \
+    ${bindir}/eeprom_writer.py \
 "
 
 CONFFILES_${PN} ="\
