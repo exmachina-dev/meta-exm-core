@@ -7,11 +7,11 @@ SECTION = "libs"
 LICENSE = "GPLv3+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "64c8aabadd686cb8a0228a2e570d30e9668261ab"
+SRCREV = "2dcd638645e1e3bae95acbab67da13555b986286"
 
 PR = "r1"
 PV_append = "+git${SRCPV}"
-BRANCH = "dev"
+BRANCH = "dev-pylibmodbus"
 
 RDEPENDS_${PN} = "\
     libgcc \
@@ -23,13 +23,12 @@ RDEPENDS_${PN} = "\
     python3-logging \
     python3-multiprocessing \
     python3-pyliblo \
-    python3-pymodbus \
+    python3-pylibmodbus \
     python3-pyserial \
     python3-readline \
     python3-smbus \
     python3-subprocess \
     python3-threading \
-    python3-daemon \
 "
 
 SRC_URI = "\
