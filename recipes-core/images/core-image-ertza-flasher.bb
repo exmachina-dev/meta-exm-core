@@ -6,6 +6,7 @@ LICENSE = "MIT"
 
 IMAGE_INSTALL += "\
     emmc-flasher \
+    armaz-commissioning-wizard \
 "
 
 export IMAGE_BASENAME = "core-image-ertza-flasher"

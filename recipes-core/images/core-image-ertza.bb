@@ -7,6 +7,7 @@ LICENSE = "MIT"
 
 IMAGE_INSTALL += "\
     useradd-ertza \
+    base-files \
     ertza \
     opkg \
     opkg-config \
