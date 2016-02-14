@@ -1,0 +1,27 @@
+#usr/bin/env sh
+# vim: ft=sh
+
+echo -e "Armaz commissioning wizard"
+echo -e "==========================\n"
+
+echo "Adjusting time:"
+echo "==============="
+echo
+set-rtc-clock
+
+echo
+echo "Updating EEPROM contents:"
+echo "========================="
+echo -e "Warning: make sure EEPROM is not write-protected.\n\n"
+/usr/bin/eeprom_writer.py
+
+if [[ "x$1" == "xFLASHER" ]]; then
+    echo
+    echo "Flashing EMMC with latest image:"
+    echo "================================"
+    echo
+    /usr/bin/emmc-flasher
+fi
+
+echo
+echo "All done"
