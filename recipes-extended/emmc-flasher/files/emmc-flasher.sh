@@ -89,7 +89,12 @@ echo "timer" > /sys/devices/platform/leds/leds/beaglebone\:green\:mmc0/trigger
 echo "timer" > /sys/devices/platform/leds/leds/beaglebone\:green\:usr2/trigger
 echo "timer" > /sys/devices/platform/leds/leds/beaglebone\:green\:usr3/trigger
 
-read confirm
+if [[ "x$1" != "xNO_CONFIRM" ]]; then
+    read confirm
+else
+    confirm="y"
+fi
+
 if [[ "x$confirm" != "xy" ]]; then
     echo "Aborting"
     exit 2
@@ -137,10 +142,17 @@ echo "Writing $IMG to $TARGET_MMC… Done." || exit 3
 
 sync
 
+echo "Expanding $ROOT_PART…"
+resize2fs $ROOT_PART
+echo "Expanding $ROOT_PART… Done."
+
 echo "default-on" > /sys/devices/platform/leds/leds/beaglebone\:green\:usr2/trigger
 echo "default-on" > /sys/devices/platform/leds/leds/beaglebone\:green\:usr3/trigger
 
 echo
-echo "Press [Enter] to reboot. Please remove sdcard after poweroff."
-read reboot
-reboot
+if [[ "x$1" != "xNO_CONFIRM" ]]; then
+    echo "Press [Enter] to reboot. Please remove sdcard after poweroff."
+    read reboot
+else
+    echo "All done."
+fi

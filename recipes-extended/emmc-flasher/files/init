@@ -1,0 +1,29 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:		emmc-flasher
+# Required-Start:	$remote_fs $syslog $networking
+# Required-Stop:	$remote_fs $syslog
+# Default-Start:	2 3 4 5
+# Short-Description:	EMMC flasher for Armaz
+### END INIT INFO
+#
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+PROGRAM=/usr/bin/emmc-flasher
+NAME=emmc-flasher
+DESC="EMMC flasher for Armaz"
+
+case "$1" in
+  start)
+	echo -n "Starting $DESC: "
+        ($PROGRAM NO_CONFIRM)&
+	echo "$NAME."
+	;;
+  *)
+	N=/etc/init.d/$NAME
+	echo "Usage: $N {start}" >&2
+	exit 1
+	;;
+esac
+
+exit 0
