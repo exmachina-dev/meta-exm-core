@@ -16,6 +16,7 @@ DAEMON=/usr/bin/ertzad
 NAME=ertza
 DESC="Ertza for Armaz"
 PIDFILE=/var/run/ertza.pid
+ERTZA_ARGS='-f'
 
 case "$1" in
   start)
