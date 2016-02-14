@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+NTPD="/usr/sbin/ntpd"
+NTPD_SERVICE="/etc/init.d/ntpd"
+
+HWCLOCK="/etc/init.d/hwclock.sh"
+
+echo -n "Stopping ntp daemon…"
+$NTPD_SERVICE stop > /dev/null 2>&1 && echo " Done" || exit 1
+
+echo -n "Running ntpd to adjust time…"
+$NTPD -q -gg -x > /dev/null 2>&1 && echo " Done" || exit 2
+
+echo -n "New time:"
+date
+
+echo -n "Storing new time to RTC…"
+$HWCLOCK stop && echo " Done" || exit 3
+
+echo -n "Starting normal ntp daemon…"
+$NTPD_SERVICE start > /dev/null 2>&1 && echo " Done" || exit 4
