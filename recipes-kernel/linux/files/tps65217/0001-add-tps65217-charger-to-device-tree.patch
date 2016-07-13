@@ -16,7 +16,7 @@ index bb8d012..30ffdf3 100644
  		};
  	};
 +        
-+        charger {
++        tps95217-charger {
 +                compatible = "ti,tps65217-charger";
 +        };
  };
