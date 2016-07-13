@@ -11,31 +11,45 @@
 # Do not configure this file. Edit /etc/ertza/custom.conf instead!
 #
 
+LAUNCH_AS_DAEMON=0
+
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/bin/ertzad
 NAME=ertza
 DESC="Ertza for Armaz"
 PIDFILE=/var/run/ertza.pid
-ERTZA_ARGS='-f'
+ERTZAD_ARGS='-f -e /dev/null -o /dev/null'
 
 case "$1" in
   start)
 	echo -n "Starting $DESC: "
-        start-stop-daemon -S -p $PIDFILE \
-           -x "$DAEMON" -- -p $PIDFILE $ERTZA_ARGS start
+
+        sleep 30
+        (nohup /usr/bin/ertza > /dev/null 2>&1)&
+
 	echo "$NAME."
 	;;
   stop)
 	echo -n "Stopping $DESC: "
         start-stop-daemon -K -p $PIDFILE -x "$DAEMON" -- -p $PIDFILE stop
+
+        if [[ LAUNCH_AS_DAEMON == 1 ]]; then
+            start-stop-daemon -K -p $PIDFILE \
+               -x "$DAEMON" -- -p $PIDFILE stop
+        else
+            kill `cat $PIDFILE`
+        fi
         sleep 5
         killall -SIGTERM python3
 	echo "$NAME."
 	;;
   restart|force-reload)
 	echo -n "Restarting $DESC: "
-        start-stop-daemon -S -p $PIDFILE \
-           -x "$DAEMON" -- -p $PIDFILE $ERTZA_ARGS restart
+
+        if [[ LAUNCH_AS_DAEMON == 1 ]]; then
+            start-stop-daemon -S -p $PIDFILE \
+               -x "$DAEMON" -- -p $PIDFILE $ERTZA_ARGS restart
+        fi
 	echo "$NAME."
 	;;
   *)
