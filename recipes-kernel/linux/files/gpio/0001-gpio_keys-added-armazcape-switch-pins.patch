@@ -53,7 +53,7 @@ index ae1e1ee..600d599 100644
 +                compatible = "gpio-keys";
 +                pinctrl-names = "default";
 +                pinctrl-0 = <&armazcape_sw_pins>;
-+                #address-cells = <1>;
++                #address-cells = <2>;
 +                #size-cells = <0>;
 +
 +                switch_ext0 {
