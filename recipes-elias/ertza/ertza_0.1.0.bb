@@ -7,7 +7,7 @@ SECTION = "libs"
 LICENSE = "GPLv3+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "eeab833d835af70c8c12649b825d5a0ec72695d0"
+SRCREV = "c8b2e10b1b91aeddedce5740cff42fdb585641ef"
 
 PR = "r1"
 PV_append = "+git${SRCPV}"
