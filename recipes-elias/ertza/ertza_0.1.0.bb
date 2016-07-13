@@ -7,11 +7,11 @@ SECTION = "libs"
 LICENSE = "GPLv3+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "2dcd638645e1e3bae95acbab67da13555b986286"
+SRCREV = "eeab833d835af70c8c12649b825d5a0ec72695d0"
 
 PR = "r1"
 PV_append = "+git${SRCPV}"
-BRANCH = "dev-pylibmodbus"
+BRANCH = "dev"
 
 RDEPENDS_${PN} = "\
     libgcc \
@@ -32,7 +32,7 @@ RDEPENDS_${PN} = "\
 "
 
 SRC_URI = "\
-    git://github.com/exmachina-dev/ertza.git;protocol=https;branch=${BRANCH} \
+    git:///home/willykaze/repos/ertza;protocol=file;branch=${BRANCH} \
     file://ertza.service \
     file://init \
     file://10-eth0.network \
@@ -64,6 +64,7 @@ do_install_append() {
     install -d ${D}${sysconfdir} \
             ${D}${sysconfdir}/ertza \
             ${D}${sysconfdir}/ertza/variants \
+            ${D}${sysconfdir}/ertza/profiles \
             ${D}${bindir} \
 
     install -m 0755 ${S}/bin/ertza ${D}${bindir}/
@@ -79,7 +80,6 @@ do_install_append() {
 
     # deal with systemd unit files
     install -d ${D}${systemd_unitdir}/system
-    install -d ${D}${sysconfdir}/systemd/network
 
     install -d ${D}${sysconfdir}/init.d
     install -m 744 ${WORKDIR}/init ${D}${sysconfdir}/init.d/ertza
@@ -91,14 +91,12 @@ do_install_append() {
             -e 's,/usr,${prefix},g' ${WORKDIR}/ertza.service > ${D}${systemd_unitdir}/system/ertza.service
     chmod 644 ${D}${systemd_unitdir}/system/ertza.service
 
-    install -m 0644 ${WORKDIR}/10-eth0.network ${D}${sysconfdir}/systemd/network/
 }
 
 FILES_${PN} = "\
     ${sysconfdir}/ertza/* \
     ${sysconfdir}/ertza/* \
     ${systemd_unitdir}/system/ertza.service \
-    ${sysconfdir}/systemd/network/10-eth0.network \
     ${sysconfdir}/init.d/ertza \
     ${bindir}/ertza \
     ${bindir}/ertzad \
